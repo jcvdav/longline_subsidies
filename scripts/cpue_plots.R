@@ -1,5 +1,5 @@
 #load original data
-cpue_by_vessel <- read.csv("annual_effort_and_catch_by_vessel.csv")
+cpue_by_vessel <- read.csv("data/estimation/annual_effort_and_catch_by_vessel.csv")
 
 #removing outliers
 Q1 <- quantile(cpue_by_vessel$cpue, 0.25)
