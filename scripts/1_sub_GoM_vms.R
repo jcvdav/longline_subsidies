@@ -38,7 +38,7 @@ vi <- tbl(con, "vessel_info_v_20230803")
 # X ----------------------------------------------------------------------------
 ll <- vi |> 
   filter(str_detect(gear_type, "PALANGRE")) |> 
-  select(vessel_rnpa)
+  select(vessel_rnpa, eu_rnpa)
 
 effort <- vms |> 
   inner_join(ll, by = join_by(vessel_rnpa)) |> 
@@ -47,7 +47,7 @@ effort <- vms |>
          depth_m < -50,
          hours < 1.5,
          distance_from_shore_m > 5e2) |> 
-  group_by(year, vessel_rnpa) |> 
+  group_by(year, eu_rnpa, vessel_rnpa) |> 
   summarize(h = sum(hours, na.rm = T),
             .groups = "drop")
 
