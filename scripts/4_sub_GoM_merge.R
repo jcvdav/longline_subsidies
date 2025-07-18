@@ -28,10 +28,12 @@ subsidies <- readRDS(file = here("data", "processed", "annual_subsidies_by_econo
 # X ----------------------------------------------------------------------------
 data <- inner_join(effort, landings, by = join_by(year, vessel_rnpa)) |> 
   # Aubri, add a left join here
+  left_join(subsidies, by = join_by(year, eu_rnpa)) |> 
   mutate(period = ifelse(year <= 2019, "subsidies", "no subsidies")) |> 
+  replace_na(list(subsidy_pesos = 0, treated = 0)) |> 
   # Aubri, look at the documentation for replace_na (use ?replace_na in the console, yes, with the question mark first)
   # You will need to replace NAs in the "treated" and "subsidy_pesos" columns with 0.
-  select(period, year, eu_id = eu_rnpa, vessel_id = vessel_rnpa, effort_hours = h, catch_kg = live_weight) |> # Select the appropriate columns here
+  select(period, year, eu_id = eu_rnpa, vessel_id = vessel_rnpa, effort_hours = h, catch_kg = live_weight, subsidy_pesos) |> # Select the appropriate columns here
   mutate(cpue = catch_kg / effort_hours)
 
 ## VISUALIZE ###################################################################
