@@ -33,7 +33,7 @@ data <- inner_join(effort, landings, by = join_by(year, vessel_rnpa)) |>
   replace_na(list(subsidy_pesos = 0, treated = 0)) |> 
   # Aubri, look at the documentation for replace_na (use ?replace_na in the console, yes, with the question mark first)
   # You will need to replace NAs in the "treated" and "subsidy_pesos" columns with 0.
-  select(period, year, eu_id = eu_rnpa, vessel_id = vessel_rnpa, effort_hours = h, catch_kg = live_weight, subsidy_pesos) |> # Select the appropriate columns here
+  select(period, year, eu_id = eu_rnpa, vessel_id = vessel_rnpa, effort_hours = h, catch_kg = live_weight) |> # Select the appropriate columns here
   mutate(cpue = catch_kg / effort_hours)
 
 ## VISUALIZE ###################################################################
@@ -49,7 +49,6 @@ ggplot(data, aes(x = period, y = cpue)) +
   stat_summary(geom = "col", fun = "mean")
 
 ## EXPORT ######################################################################
-
 # X ----------------------------------------------------------------------------
 saveRDS(object = data,
         file = here("data", "estimation", "annual_effort_and_catch_by_vessel.rds"))
