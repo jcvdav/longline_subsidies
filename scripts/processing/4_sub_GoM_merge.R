@@ -34,8 +34,6 @@ data <- inner_join(effort, landings, by = join_by(year, vessel_rnpa)) |>
   group_by(vessel_rnpa, period) |>
   mutate(n_times_subsidized = sum(treated, na.rm = TRUE)) |>
   ungroup() |>
-  # Aubri, look at the documentation for replace_na (use ?replace_na in the console, yes, with the question mark first)
-  # You will need to replace NAs in the "treated" and "subsidy_pesos" columns with 0.
   select(period, year, eu_id = eu_rnpa, vessel_id = vessel_rnpa, n_times_subsidized, effort_hours = h, catch_kg = live_weight) |> # Select the appropriate columns here
   mutate(cpue = catch_kg / effort_hours) 
   
