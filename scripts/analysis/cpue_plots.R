@@ -1,20 +1,24 @@
-#load original data
-cpue_by_vessel <- read.csv("data/estimation/annual_effort_and_catch_by_vessel.csv")
+#load original data------------------------------------------------------
+cpue_by_vessel <- readRDS("data/estimation/annual_effort_and_catch_by_vessel.rds")
 
-#removing outliers
-Q1 <- quantile(cpue_by_vessel$cpue, 0.25)
-Q3 <- quantile(cpue_by_vessel$cpue, 0.75)
+#filtering data- removing vessels not subsidized all years of subsidy period-----------------------
+cpue_by_vessel_clean <- cpue_by_vessel |> 
+  filter(period == "no subsidies" | n_times_subsidized == 4 & period == "subsidies") 
+
+#removing outliers-------------------------------------------------------
+Q1 <- quantile(cpue_by_vessel_clean$cpue, 0.25)
+Q3 <- quantile(cpue_by_vessel_clean$cpue, 0.75)
 IQR = Q3 - Q1
 
 lower_bound <- Q1 - 1.5 * IQR
 upper_bound <- Q3 + 1.5 * IQR
 
-cpue_clean <- cpue_by_vessel[cpue_by_vessel$cpue >= lower_bound & cpue_by_vessel$cpue <= upper_bound,  ]
+cpue_clean <- cpue_by_vessel_clean[cpue_by_vessel_clean$cpue >= lower_bound & cpue_by_vessel_clean$cpue <= upper_bound,  ]
 
-#plots
+#plots---------------------------------------------------------------------
 
 #boxplot, before outlier removal   
-cpue_by_vessel |> 
+cpue_by_vessel_clean |> 
   ggplot(aes(x = fct_infreq(period), y = cpue)) +
   geom_boxplot() +
   labs(
