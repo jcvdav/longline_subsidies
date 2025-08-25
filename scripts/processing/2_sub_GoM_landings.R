@@ -20,7 +20,7 @@ pacman::p_load(
 
 # Load data --------------------------------------------------------------------
 effort <- readRDS(file = here("data", "processed", "annual_effort_by_vessel.rds"))
-landings <- readRDS(file = here("../mex_fisheries/data/mex_landings/clean/mex_annual_landings_by_vessel.rds")) # Will only work on JC's computers for now
+landings <- readRDS(file = url("https://github.com/jcvdav/mex_fisheries/raw/refs/heads/main/data/mex_landings/clean/mex_annual_landings_by_vessel.rds"))
 
 ## PROCESSING ##################################################################
 
