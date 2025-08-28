@@ -19,18 +19,18 @@ cpue_by_vessel_clean <- cpue_by_vessel |>
 
 
 #removing outliers----------------------------------------------------
-Q1 <- quantile(cpue_by_vessel$cpue, 0.25)
-Q3 <- quantile(cpue_by_vessel$cpue, 0.75)
-IQR = Q3 - Q1
+#Q1 <- quantile(cpue_by_vessel$cpue, 0.25)
+#Q3 <- quantile(cpue_by_vessel$cpue, 0.75)
+#IQR = Q3 - Q1
 
-lower_bound <- Q1 - 1.5 * IQR
-upper_bound <- Q3 + 1.5 * IQR
+#lower_bound <- Q1 - 1.5 * IQR
+#upper_bound <- Q3 + 1.5 * IQR
 
-cpue_clean <- cpue_by_vessel[cpue_by_vessel$cpue >= lower_bound & cpue_by_vessel$cpue <= upper_bound,  ]
+#cpue_clean <- cpue_by_vessel[cpue_by_vessel$cpue >= lower_bound & cpue_by_vessel$cpue <= upper_bound,  ]
 
 
 #identifying outliers
-cpue_outliers <- cpue_by_vessel[cpue_by_vessel$cpue <= lower_bound | cpue_by_vessel$cpue >= upper_bound, ]
+#cpue_outliers <- cpue_by_vessel[cpue_by_vessel$cpue <= lower_bound | cpue_by_vessel$cpue >= upper_bound, ]
 
 
 #significance tests-------------------------------------------------
@@ -39,21 +39,24 @@ cpue_outliers <- cpue_by_vessel[cpue_by_vessel$cpue <= lower_bound | cpue_by_ves
 
 t.test(cpue ~ period, data = cpue_by_vessel_clean)
 #50.6% decrease in cpue, p = 0.2877
-t.test(cpue ~ period, data = cpue_clean)
+
+#t.test(cpue ~ period, data = cpue_clean)
 #12.3% increase in cpue, p = 0.03804
 
 #effort before and after subsidies
 
 t.test(effort_hours ~ period, data = cpue_by_vessel_clean)
 #16.5% decrease in effort, p = 0.000252
-t.test(effort_hours ~ period, data = cpue_clean)
+
+#t.test(effort_hours ~ period, data = cpue_clean)
 #23.7% decrease in effort, p = 0.00000026
 
 #catch before and after subsidies
 
 t.test(catch_kg ~ period, data = cpue_by_vessel_clean)
 #10.1% decrease in catch, p = 0.1314
-t.test(catch_kg ~ period, data = cpue_clean)
+
+#t.test(catch_kg ~ period, data = cpue_clean)
 #13.6% decrease in catch, p = 0.03917 NO SIGNIFICANCE
 
 
