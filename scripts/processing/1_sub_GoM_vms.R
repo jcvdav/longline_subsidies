@@ -27,17 +27,17 @@ bq_auth("juancarlos.villader@gmail.com")
 con <- dbConnect(drv = bigquery(),
                  project = "mex-fisheries",
                  dataset = "mex_vms",
-                 billing = "mex-fisheries",
                  allowLargeResults = T)
 
-vms <- tbl(con, "mex_vms_processed_v_20250613")
-vi <- tbl(con, "vessel_info_v_20230803")
+vms <- tbl(con, "mex_vms_processed_v_20250623")
+vi <- tbl(con, "vessel_info_v_20250815")
 
 ## PROCESSING ##################################################################
 
 # X ----------------------------------------------------------------------------
 ll <- vi |> 
-  filter(str_detect(gear_type, "PALANGRE")) |> 
+  mutate(across(starts_with("gear_"), as.character)) |>
+  filter(if_any(starts_with("gear_"), ~ str_detect(.x, "PALANGRE"))) |>
   select(vessel_rnpa, eu_rnpa)
 
 effort <- vms |> 
