@@ -1,11 +1,16 @@
 #load packages
 library(dplyr)
+library(fixest)
 
 #load original data
 cpue_by_vessel <- readRDS("data/estimation/annual_effort_and_catch_by_vessel.rds")
 
-#subsidy counts-----------------------------------------------------
 
+#filtering data- removing vessels not subsidized all years of subsidy period-----------------------
+cpue_by_vessel_clean <- cpue_by_vessel |> 
+  filter(period == "no subsidies" | n_times_subsidized == 4 & period == "subsidies") 
+
+#subsidy counts-----------------------------------------------------
 subsidy_counts <- cpue_by_vessel |> 
   filter(period == "subsidies") |> 
   group_by(vessel_id) |> 
@@ -13,29 +18,30 @@ subsidy_counts <- cpue_by_vessel |>
 
 count(subsidy_counts, years_subsidized) 
 
-#filtering data- removing vessels not subsidized all years of subsidy period-----------------------
-cpue_by_vessel_clean <- cpue_by_vessel |> 
-  filter(period == "no subsidies" | n_times_subsidized == 4 & period == "subsidies") 
+#eu counts -----------------------------------------------------
+
+count(cpue_by_vessel_clean, eu_id)
 
 
 #removing outliers----------------------------------------------------
-#Q1 <- quantile(cpue_by_vessel$cpue, 0.25)
-#Q3 <- quantile(cpue_by_vessel$cpue, 0.75)
-#IQR = Q3 - Q1
+Q1 <- quantile(cpue_by_vessel_clean$cpue, 0.25)
+Q3 <- quantile(cpue_by_vessel_clean$cpue, 0.75)
+IQR = Q3 - Q1
 
-#lower_bound <- Q1 - 1.5 * IQR
-#upper_bound <- Q3 + 1.5 * IQR
+lower_bound <- Q1 - 1.5 * IQR
+upper_bound <- Q3 + 1.5 * IQR
 
-#cpue_clean <- cpue_by_vessel[cpue_by_vessel$cpue >= lower_bound & cpue_by_vessel$cpue <= upper_bound,  ]
+cpue_clean <- cpue_by_vessel_clean[cpue_by_vessel_clean$cpue >= lower_bound & cpue_by_vessel_clean$cpue <= upper_bound,  ]
 
 
 #identifying outliers
-#cpue_outliers <- cpue_by_vessel[cpue_by_vessel$cpue <= lower_bound | cpue_by_vessel$cpue >= upper_bound, ]
+cpue_outliers <- cpue_by_vessel_clean[cpue_by_vessel_clean$cpue <= lower_bound | cpue_by_vessel_clean$cpue >= upper_bound, ]
+
 
 
 #significance tests-------------------------------------------------
 
-#cpue before and after subsidies
+# t tests cpue before and after subsidies
 
 t.test(cpue ~ period, data = cpue_by_vessel_clean)
 #50.6% decrease in cpue, p = 0.2877
@@ -59,5 +65,29 @@ t.test(catch_kg ~ period, data = cpue_by_vessel_clean)
 #t.test(catch_kg ~ period, data = cpue_clean)
 #13.6% decrease in catch, p = 0.03917 NO SIGNIFICANCE
 
+#Linear regressions------------------------------------------------- 
 
+#Adjusting reference level
+cpue_by_vessel_clean$period <- factor(cpue_by_vessel_clean$period, levels = c("subsidies", "no subsidies"))
 
+#CPUE
+model_cpue <- feols(cpue ~ period | vessel_id, data = cpue_by_vessel_clean) 
+summary(model_cpue)
+
+#Effort 
+model_effort <- feols(effort_hours ~ period | vessel_id, data = cpue_by_vessel_clean)
+summary(model_effort)
+
+#Catch
+model_catch <- feols(catch_kg ~ period | vessel_id, data = cpue_by_vessel_clean)
+summary(model_catch)
+
+#Summary table
+etable(model_effort, model_catch, model_cpue,
+       dict = c("periodsubsidies" = "Subsidies"),
+       tex = TRUE,
+       file = "cpue_regression.tex",
+       title = "Impact of Subsidy Reform on Catch Efficiency, Effort, and Catch",
+       label = "tab:cpue_regression",
+       fitstat = c("n", "r2"),
+       digits = 3)
