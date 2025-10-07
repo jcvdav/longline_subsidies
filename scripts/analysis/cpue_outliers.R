@@ -4,6 +4,7 @@ library(DBI)
 library(sf)
 library(dplyr)
 library(leaflet)
+library(lubridate)
 
 #authenticate with Google Cloud ------------------------------------
 bq_auth("laubri42@gmail.com")
@@ -14,22 +15,35 @@ project_id <- "mex-fisheries"
 dataset <- "mex_vms"
 table <- "mex_vms_processed_v_20250623"
 
+full_table <- bq_table(project_id, dataset, table)
+spatial_df <- bq_table_download(full_table)
+
+con <- dbConnect(
+  bigrquery::bigquery(),
+  project = project_id,
+  dataset = dataset,
+  billing = project_id
+)
+
+vms_tbl <- tbl(con, table)
+
+#function to isolate outliers------------------------------------------------------
+get_vms_data <- function(rnpa, year) {
+  vms_tbl %>%
+    filter(
+      vessel_rnpa == rnpa,
+      sql(paste0("EXTRACT(YEAR FROM datetime) = ", year))
+    ) %>%
+    arrange(datetime) %>%
+    collect()
+}
+
+#Vessel 0034389, year 2018 ------------------------------------------------------
+#filter ------------------------------------------------------
 vessel_rnpa <- "00034389"
 year <- 2018
 
-query <- sprintf("
-  SELECT vessel_rnpa, datetime, lat, lon
-  FROM `%s.%s.%s`
-  WHERE vessel_rnpa = '%s' 
-    AND EXTRACT(YEAR FROM datetime) = %d
-  ORDER BY datetime ASC
-", project_id, dataset, table, vessel_rnpa, year)
-      
-
-#run query------------------------------------------------------
-
-spatial_data <- bq_project_query(project_id, query)
-spatial_df <- bq_table_download(spatial_data)
+spatial_df <- get_vms_data(vessel_rnpa, year)
 
 #export data------------------------------------------------------
 write.csv(spatial_df, "data/estimation/vms_00034389_2018.csv", row.names = FALSE)
@@ -37,10 +51,9 @@ write.csv(spatial_df, "data/estimation/vms_00034389_2018.csv", row.names = FALSE
 #convert to sf object------------------------------------------------------
 
 spatial_sf <- st_as_sf(spatial_df, coords = c("lon", "lat"), crs = 4326)
-st_write(spatial_sf, "data/estimation/vms_00034389_2018.geojson", driver = "GeoJSON", delete_dsn = TRUE)
+st_write(spatial_sf, "data/estimation/vms_00034389_2018.gpkg", driver = "GPKG", delete_dsn = TRUE)
 
 #create a leaflet map------------------------------------------------------
-spatial_sf <- spatial_sf %>% arrange(datetime)
 
 track_line <- spatial_sf %>%
   summarise(do_union = FALSE) %>%
@@ -61,4 +74,75 @@ leaflet() %>%
     weight = 2,
     opacity = 0.8
   )
+#Vessel 00034389, year 2016 ------------------------------------------------------
+#filter ------------------------------------------------------
+vessel_rnpa <- "00034389"
+year <- 2016
 
+spatial_df <- get_vms_data(vessel_rnpa, year)
+
+#export data------------------------------------------------------
+write.csv(spatial_df, "data/estimation/vms_00034389_2016.csv", row.names = FALSE)
+
+#convert to sf object------------------------------------------------------
+
+spatial_sf <- st_as_sf(spatial_df, coords = c("lon", "lat"), crs = 4326)
+st_write(spatial_sf, "data/estimation/vms_00034389_2016.gpkg", driver = "GPKG", delete_dsn = TRUE)
+
+#create a leaflet map------------------------------------------------------
+
+track_line <- spatial_sf %>%
+  summarise(do_union = FALSE) %>%
+  st_cast("LINESTRING")
+
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    data = spatial_sf,
+    radius = 3,
+    popup = ~paste("Time:", datetime),
+    color = "blue"
+  ) %>%
+  addPolylines(
+    data = track_line,
+    color = "red",
+    weight = 2,
+    opacity = 0.8
+  )
+#Vessel 00074500, year 2018 ------------------------------------------------------
+#filter ------------------------------------------------------
+vessel_rnpa <- "00074500"
+year <- 2018
+
+spatial_df <- get_vms_data(vessel_rnpa, year)
+
+#export data------------------------------------------------------
+write.csv(spatial_df, "data/estimation/vms_00074500_2018.csv", row.names = FALSE)
+
+#convert to sf object------------------------------------------------------
+
+spatial_sf <- st_as_sf(spatial_df, coords = c("lon", "lat"), crs = 4326)
+st_write(spatial_sf, "data/estimation/vms_00074500_2018.gpkg", driver = "GPKG", delete_dsn = TRUE)
+
+#create a leaflet map------------------------------------------------------
+
+track_line <- spatial_sf %>%
+  summarise(do_union = FALSE) %>%
+  st_cast("LINESTRING")
+
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    data = spatial_sf,
+    radius = 3,
+    popup = ~paste("Time:", datetime),
+    color = "blue"
+  ) %>%
+  addPolylines(
+    data = track_line,
+    color = "red",
+    weight = 2,
+    opacity = 0.8
+  )
