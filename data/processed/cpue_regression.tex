@@ -1,0 +1,26 @@
+
+\begin{table}[htbp]
+   \caption{\label{tab:cpue_regression} Impact of Subsidy Reform on Catch Efficiency, Effort, and Catch}
+   \centering
+   \begin{tabular}{lccc}
+      \tabularnewline \midrule \midrule
+      Dependent Variables: & effort\_hours    & catch\_kg        & cpue\\  
+      Model:               & (1)              & (2)              & (3)\\  
+      \midrule
+      \emph{Variables}\\
+      periodnosubsidies    & -1,239.8$^{***}$ & -8,726.4$^{***}$ & 1.37$^{***}$\\   
+                           & (189.6)          & (2,338.9)        & (0.507)\\   
+      \midrule
+      \emph{Fixed-effects}\\
+      vessel\_id           & Yes              & Yes              & Yes\\  
+      \midrule
+      \emph{Fit statistics}\\
+      Observations         & 180              & 180              & 180\\  
+      R$^2$                & 0.30787          & 0.42362          & 0.36106\\  
+      \midrule \midrule
+      \multicolumn{4}{l}{\emph{IID standard-errors in parentheses}}\\
+      \multicolumn{4}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+   \end{tabular}
+\end{table}
+
+
