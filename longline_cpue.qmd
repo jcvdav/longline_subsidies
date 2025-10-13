@@ -1,0 +1,64 @@
+---
+title: "Impromptu fuel subsidy reform decreases effort by tuna longliners in the Gulf of Mexico"
+author: "Aubriana Rhodes"
+format: 
+  revealjs:
+    incremental: true
+---
+
+## What are fuel subsidies?
+
+-   The majority of fishing subsidies are capacity-enhancing subsidies, often fuel subsidies that directly incentivize increased effort.
+-   Fuel subsidies are financial contributions awarded from the government on artisanal gasoline (small scale vessels) and marine diesel (large scale vessels) can partially determine profitability.
+
+## Why should we care?
+
+-   Capacity-enhancing subsidies increase fishing effort above the maximum sustainable yield, leading to over 60% of Mexican fishery stocks being at biologically unsustainable levels.
+-   The World Trade Organization’s Sustainable Development Goal 14.6 called for eliminating harmful subsidies by 2020 to reduce overfishing, and allow stocks to replenish.
+-   Several studies have analyzed the impact of subsidies on the Mexican fishing industry during the subsidized years, but none have looked at how behaviors have changed since subsidy removal.
+
+## Objectives
+
+-   This project attempts to understand how Mexico’s subsidy reform might have caused a shift in effort, landings, or biomass.
+-   We focus on the tuna longline fleet in the Gulf of Mexico, which is one of the largest fleets in Mexico and was heavily subsidized prior to 2020.
+
+# Data sources
+
+## Vessel status data
+
+-   The Mexican government maintains a vessel registry of all fishing vessels, including vessel characteristics, gear type, and home port.
+
+## Vessel tracking data
+
+-   Vessel-level fishing activity data from Mexico’s Sistema de Monitoreo Satelital de Embarcaciones Pesqueras (SISMEP) reports geographical location and time through satellite monitoring equipment. This data provides hourly location for around 2,500 vessels, from 2007 to present.
+
+## Vessel-level landings
+
+-   Mexico’s fisheries management agency provides landings data through CONAPESCA Avisos between 2000 and 2019, and CONAPESCA from 2018 to present. This data set provides year, vessel identification, target species, and weight of live catch
+
+# Methods
+
+## Data processing
+
+-   Vessel monitoring system data was refined to vessels using longlining gear from 2016 to 2024. We calculated the total hours of fishing per vessel and year based on vessel speed and location of vessels that qualified for our area of interest.
+
+-   We merged the fishing effort data with vessel registry to obtain vessel characteristics, and with landings data to obtain total annual landings per vessel. 
+
+## Data analysis
+
+-   We used a linear regression model to analyze the differences in effort, catch, and catch-per-unit-effort before and after subsidy reform.
+
+-   This allows for an undertanding of vessel-level differences in fishing behavior and productivity. 
+
+## Results
+
+-   We found a significant decrease in fishing effort and catch after the subsidy reform, but no significant change in catch-per-unit-effort.
+
+
+## Discussion
+
+-   The results suggest that fuel-subsidy removal can substantially curb fishing effort with only marginal impacts on catch, pointing to a viable policy lever for rebuilding overexploited stocks.
+
+-   This provides the first vessel-level estimates of the consequences of capacity-reducing reforms in the Gulf of Mexico tuna longline fishery, and may further inform implementation of WTO SDG 14.6.
+
+-   However, the long-term ecological and economic impacts of such reforms require further investigation to ensure sustainable fisheries management.
