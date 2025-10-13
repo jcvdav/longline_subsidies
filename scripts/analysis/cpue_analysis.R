@@ -86,7 +86,7 @@ summary(model_catch)
 etable(model_effort, model_catch, model_cpue,
        dict = c("periodsubsidies" = "Subsidies"),
        tex = TRUE,
-       file = "cpue_regression.tex",
+       file = "data/processed/cpue_regression.tex",
        title = "Impact of Subsidy Reform on Catch Efficiency, Effort, and Catch",
        label = "tab:cpue_regression",
        fitstat = c("n", "r2"),
