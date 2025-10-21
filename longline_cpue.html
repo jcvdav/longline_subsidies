@@ -138,26 +138,69 @@ Aubriana Rhodes
 </div>
 
 </section>
+<section id="agenda" class="slide level2">
+<h2>Agenda</h2>
+<ul>
+<li class="fragment">Motivation &amp; Goals</li>
+<li class="fragment">What are fuel subsidies?</li>
+<li class="fragment">Previous work</li>
+<li class="fragment">Relevant policy reform</li>
+<li class="fragment">Methods</li>
+<li class="fragment">Results &amp; discussion</li>
+</ul>
+</section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<ul>
+<li class="fragment">More than 35% of global fish stocks are being overfished</li>
+<li class="fragment">Subsidies that encourage overfishing are a key driver of overcapacity in the fishing industry</li>
+<li class="fragment">Subsidization is economic inefficiency</li>
+</ul>
+</section>
+<section id="goals" class="slide level2">
+<h2>Goals</h2>
+<ul>
+<li class="fragment">Understanding how behavior changes in response to policy</li>
+<li class="fragment">Providing a reference for actions that decrease fishing effort</li>
+</ul>
+</section>
 <section id="what-are-fuel-subsidies" class="slide level2">
 <h2>What are fuel subsidies?</h2>
 <ul>
-<li class="fragment">The majority of fishing subsidies are capacity-enhancing subsidies, often fuel subsidies that directly incentivize increased effort.</li>
-<li class="fragment">Fuel subsidies are financial contributions awarded from the government on artisanal gasoline (small scale vessels) and marine diesel (large scale vessels) can partially determine profitability.</li>
+<li class="fragment">Capacity-enhancing subsidies that directly incentivize increased effort</li>
+<li class="fragment">Financial contributions awarded from the government on fuel that can partially determine profitability</li>
 </ul>
 </section>
 <section id="why-should-we-care" class="slide level2">
 <h2>Why should we care?</h2>
 <ul>
-<li class="fragment">Capacity-enhancing subsidies increase fishing effort above the maximum sustainable yield, leading to over 60% of Mexican fishery stocks being at biologically unsustainable levels.</li>
-<li class="fragment">The World Trade Organization’s Sustainable Development Goal 14.6 called for eliminating harmful subsidies by 2020 to reduce overfishing, and allow stocks to replenish.</li>
-<li class="fragment">Several studies have analyzed the impact of subsidies on the Mexican fishing industry during the subsidized years, but none have looked at how behaviors have changed since subsidy removal.</li>
+<li class="fragment">Subsidies increase fishing effort, leading to over 60% of Mexican fishery stocks being at unsustainable levels</li>
+<li class="fragment">Many fisheries are not profitable without subsidies</li>
+</ul>
+</section>
+<section id="previous-work" class="slide level2">
+<h2>Previous Work</h2>
+<ul>
+<li class="fragment">Revollo-Fernández et al.&nbsp;(2024) estimated economic and marginal product value to establish a direct relationship between subsidies and extraction</li>
+<li class="fragment">Sumaila et al.&nbsp;(2019) establishes the bulk of global subsidies to still be within the category of “capacity-enhancing” subsidies</li>
+</ul>
+</section>
+<section id="relevant-policy-reform" class="slide level2">
+<h2>Relevant Policy Reform</h2>
+
+<img data-src="plots/sdg_txt.png" class="r-stretch quarto-figure-center"><p class="caption">World Trade Organization Sustainable Development Goals</p></section>
+<section id="impromptu-mexican-subsidy-reform" class="slide level2">
+<h2>Impromptu Mexican subsidy reform</h2>
+<ul>
+<li class="fragment">In 2020, Mexico eliminated fuel subsidies for the fishing sector</li>
+<li class="fragment">The vessels referenced in this study recieved an average of $40,000 USD in subsidies annually prior to reform</li>
 </ul>
 </section>
 <section id="objectives" class="slide level2">
 <h2>Objectives</h2>
 <ul>
-<li class="fragment">This project attempts to understand how Mexico’s subsidy reform might have caused a shift in effort, landings, or biomass.</li>
-<li class="fragment">We focus on the tuna longline fleet in the Gulf of Mexico, which is one of the largest fleets in Mexico and was heavily subsidized prior to 2020.</li>
+<li class="fragment">Understanding how Mexico’s subsidy reform has caused a shift in effort, landings, or biomass</li>
+<li class="fragment">Focus: tuna longline fleet in the Gulf of Mexico, heavily subsidized prior to 2020</li>
 </ul>
 </section>
 <section>
@@ -165,22 +208,33 @@ Aubriana Rhodes
 <h1>Data sources</h1>
 
 </section>
-<section id="vessel-status-data" class="slide level2">
-<h2>Vessel status data</h2>
+<section id="subsidy-data" class="slide level2">
+<h2>Subsidy data</h2>
 <ul>
-<li class="fragment">The Mexican government maintains a vessel registry of all fishing vessels, including vessel characteristics, gear type, and home port.</li>
+<li class="fragment">CausaNautra provides subsidy allocations by economic unit from 2011-2019</li>
 </ul>
 </section>
-<section id="vessel-tracking-data" class="slide level2">
-<h2>Vessel tracking data</h2>
+<section id="vessel-montioring-system" class="slide level2">
+<h2>Vessel Montioring System</h2>
 <ul>
-<li class="fragment">Vessel-level fishing activity data from Mexico’s Sistema de Monitoreo Satelital de Embarcaciones Pesqueras (SISMEP) reports geographical location and time through satellite monitoring equipment. This data provides hourly location for around 2,500 vessels, from 2007 to present.</li>
+<li class="fragment">VMS data from the National Commission of Aquaculture and Fisheries (CONAPESCA)</li>
+<li class="fragment">provides vessel location and time</li>
+<li class="fragment">~ 2,500 vessels</li>
+<li class="fragment">2007 - present</li>
 </ul>
 </section>
 <section id="vessel-level-landings" class="slide level2">
 <h2>Vessel-level landings</h2>
 <ul>
-<li class="fragment">Mexico’s fisheries management agency provides landings data through CONAPESCA Avisos between 2000 and 2019, and CONAPESCA from 2018 to present. This data set provides year, vessel identification, target species, and weight of live catch</li>
+<li class="fragment">National commission of fisheries and aquaculture</li>
+<li class="fragment">target species and annual weight of live catch (kg)</li>
+<li class="fragment">2000-present</li>
+</ul>
+</section>
+<section id="vessel-status-data" class="slide level2">
+<h2>Vessel status data</h2>
+<ul>
+<li class="fragment">Mexican vessel registry including vessel characteristics, gear type, and home port</li>
 </ul>
 </section></section>
 <section>
@@ -188,35 +242,146 @@ Aubriana Rhodes
 <h1>Methods</h1>
 
 </section>
+<section id="focus-area" class="slide level2">
+<h2>Focus Area</h2>
+
+<img data-src="plots/longline_sets.png" class="r-stretch quarto-figure-center"><p class="caption">Ramírez‑Mendoza et al.</p></section>
 <section id="data-processing" class="slide level2">
 <h2>Data processing</h2>
 <ul>
-<li class="fragment"><p>Vessel monitoring system data was refined to vessels using longlining gear from 2016 to 2024. We calculated the total hours of fishing per vessel and year based on vessel speed and location of vessels that qualified for our area of interest.</p></li>
-<li class="fragment"><p>We merged the fishing effort data with vessel registry to obtain vessel characteristics, and with landings data to obtain total annual landings per vessel.</p></li>
+<li class="fragment">VMS filtering
+<ul>
+<li class="fragment">26 longline vessels (81.3% of total fleet)</li>
+<li class="fragment">2016-2024</li>
+<li class="fragment">Depth &gt; 50m, Distance from shore &gt; 500m</li>
+</ul></li>
+<li class="fragment">Merged with subsidy and landings data</li>
+<li class="fragment">Calculated annual effort (hours) and catch-per-unit-effort (kg/hr) by vessel</li>
 </ul>
 </section>
 <section id="data-analysis" class="slide level2">
 <h2>Data analysis</h2>
+<p><span class="math display">\[
+y_{it} = \beta S_{it} + \omega_i + \varepsilon_{it}
+\]</span></p>
 <ul>
-<li class="fragment"><p>We used a linear regression model to analyze the differences in effort, catch, and catch-per-unit-effort before and after subsidy reform.</p></li>
-<li class="fragment"><p>This allows for an undertanding of vessel-level differences in fishing behavior and productivity.</p></li>
+<li class="fragment"><span class="math inline">\(y_{it}\)</span>: Outcome variable for vessel <span class="math inline">\(i\)</span> at year <span class="math inline">\(t\)</span></li>
+<li class="fragment"><span class="math inline">\(\beta\)</span>: Effect of subsidy reform on outcome variable</li>
+<li class="fragment"><span class="math inline">\(S_{it}\)</span>: Variable for subsidy status (0 = pre subsidy reform, 1 = post subsidy reform)</li>
+<li class="fragment"><span class="math inline">\(\omega_i\)</span>: Fixed effect for vessel identification <span class="math inline">\(i\)</span></li>
+<li class="fragment"><span class="math inline">\(\varepsilon_{it}\)</span>: Error term</li>
 </ul>
 </section>
-<section id="results" class="slide level2">
-<h2>Results</h2>
+<section id="data-analysis-1" class="slide level2">
+<h2>Data analysis</h2>
 <ul>
-<li class="fragment">We found a significant decrease in fishing effort and catch after the subsidy reform, but no significant change in catch-per-unit-effort.</li>
+<li class="fragment"><p>We used a linear regression model to analyze the differences in effort, catch, and catch-per-unit-effort before and after subsidy reform</p></li>
+<li class="fragment"><p>This allows for an understanding of vessel-level differences in fishing behavior and productivity</p></li>
 </ul>
+</section>
+<section id="patterns--effort" class="slide level2">
+<h2>Patterns- effort</h2>
+
+<img data-src="plots/effort_plot_clean.png" class="quarto-figure quarto-figure-center r-stretch" width="359"></section>
+<section id="patterns--effort-catch-and-catch-per-unit-effort" class="slide level2">
+<h2>Patterns- effort, catch, and catch-per-unit-effort</h2>
+<p><img data-src="plots/effort_bar_clean.png" width="359"> <img data-src="plots/catch_bar_clean.png" width="314"> <img data-src="plots/cpue_bar_clean.png" width="310" height="449"></p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<table class="caption-top">
+<caption>Impact of Subsidy Reform on effort, catch, and catch-per-unit-effort (cpue)</caption>
+<colgroup>
+<col style="width: 32%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dependent Variables:</th>
+<th>effort (hours)</th>
+<th>catch (kg)</th>
+<th>cpue (kg/hr)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Subsidized period</td>
+<td>5,079.47</td>
+<td>52,678.63</td>
+<td>10.35</td>
+</tr>
+<tr class="even">
+<td>No subsidy period</td>
+<td>-1,361.4***</td>
+<td>-8,540.4***</td>
+<td>2.19***</td>
+</tr>
+<tr class="odd">
+<td>Standard Error</td>
+<td>(190.9)</td>
+<td>(2,285.2)</td>
+<td>(0.617)</td>
+</tr>
+<tr class="even">
+<td>Observations</td>
+<td>187</td>
+<td>187</td>
+<td>187</td>
+</tr>
+<tr class="odd">
+<td>R²</td>
+<td>0.31122</td>
+<td>0.42218</td>
+<td>0.34551</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="discussion" class="slide level2">
 <h2>Discussion</h2>
 <ul>
-<li class="fragment"><p>The results suggest that fuel-subsidy removal can substantially curb fishing effort with only marginal impacts on catch, pointing to a viable policy lever for rebuilding overexploited stocks.</p></li>
-<li class="fragment"><p>This provides the first vessel-level estimates of the consequences of capacity-reducing reforms in the Gulf of Mexico tuna longline fishery, and may further inform implementation of WTO SDG 14.6.</p></li>
-<li class="fragment"><p>However, the long-term ecological and economic impacts of such reforms require further investigation to ensure sustainable fisheries management.</p></li>
+<li class="fragment"><p>Fuel-subsidy removal can substantially curb fishing effort with marginal impacts on catch</p></li>
+<li class="fragment"><p>First vessel-level estimates of the consequences of capacity-reducing reforms in the Gulf of Mexico tuna longline fishery</p></li>
+<li class="fragment"><p>Long-term impacts of reforms require further investigation to ensure sustainable fisheries management</p></li>
 </ul>
-
+</section>
+<section id="next-steps" class="slide level2">
+<h2>Next steps</h2>
+<ul>
+<li class="fragment">Compare patterns of behavior to an unsubsidized fleet as a control group</li>
+</ul>
+</section>
+<section id="thank-you." class="slide level2">
+<h2>Thank you.</h2>
+</section>
+<section id="bar-charts-before-outlier-removal" class="slide level2">
+<h2>Bar charts, before outlier removal</h2>
+<p><img data-src="plots/effort_bar.png" width="315"> <img data-src="plots/catch_bar.png" width="315"> <img data-src="plots/cpue_bar.png" width="315"></p>
+</section>
+<section id="scatter-plots-after-outlier-removal" class="slide level2">
+<h2>Scatter plots, after outlier removal</h2>
+<p><img data-src="plots/effort_plot_clean.png" width="322"> <img data-src="plots/catch_plot_clean.png" width="322"> <img data-src="plots/cpue_plot_clean.png" width="322"></p>
+</section>
+<section id="scatter-plots-before-outlier-removal" class="slide level2">
+<h2>Scatter plots, before outlier removal</h2>
+<p><img data-src="plots/effort_plot.png" width="322"> <img data-src="plots/catch_plot.png" width="322"> <img data-src="plots/cpue_plot.png" width="322"></p>
+</section>
+<section id="box-plots-after-outlier-removal" class="slide level2">
+<h2>Box Plots, after outlier removal</h2>
+<p><img data-src="plots/effort_box_clean.png" width="322"> <img data-src="plots/catch_box_clean.png" width="322"> <img data-src="plots/cpue_box_clean.png" width="322"></p>
+</section>
+<section id="box-plots-before-outlier-removal" class="slide level2">
+<h2>Box plots, before outlier removal</h2>
+<p><img data-src="plots/effort_box.png" width="322"> <img data-src="plots/catch_box.png" width="322"> <img data-src="plots/cpue_box.png" width="322"></p>
 </section></section>
+<section id="effort-box-plots" class="title-slide slide level1 center">
+<h1>Effort box plots</h1>
+<p>Before and after subsidy removal</p>
+<p><img data-src="plots/effort_box.png" width="400"> <img data-src="plots/effort_box_clean.png" width="400"></p>
+
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

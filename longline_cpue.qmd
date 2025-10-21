@@ -6,59 +6,167 @@ format:
     incremental: true
 ---
 
+## Agenda
+
+-   Motivation & Goals
+-   What are fuel subsidies?
+-   Previous work
+-   Relevant policy reform
+-   Methods
+-   Results & discussion
+
+## Motivation
+
+-   More than 35% of global fish stocks are being overfished
+-   Subsidies that encourage overfishing are a key driver of overcapacity in the fishing industry
+-   Subsidization is economic inefficiency
+
+## Goals
+
+-   Understanding how behavior changes in response to policy
+-   Providing a reference for actions that decrease fishing effort
+
 ## What are fuel subsidies?
 
--   The majority of fishing subsidies are capacity-enhancing subsidies, often fuel subsidies that directly incentivize increased effort.
--   Fuel subsidies are financial contributions awarded from the government on artisanal gasoline (small scale vessels) and marine diesel (large scale vessels) can partially determine profitability.
+-   Capacity-enhancing subsidies that directly incentivize increased effort
+-   Financial contributions awarded from the government on fuel that can partially determine profitability
 
 ## Why should we care?
 
--   Capacity-enhancing subsidies increase fishing effort above the maximum sustainable yield, leading to over 60% of Mexican fishery stocks being at biologically unsustainable levels.
--   The World Trade Organization’s Sustainable Development Goal 14.6 called for eliminating harmful subsidies by 2020 to reduce overfishing, and allow stocks to replenish.
--   Several studies have analyzed the impact of subsidies on the Mexican fishing industry during the subsidized years, but none have looked at how behaviors have changed since subsidy removal.
+-   Subsidies increase fishing effort, leading to over 60% of Mexican fishery stocks being at unsustainable levels
+-   Many fisheries are not profitable without subsidies
+
+## Previous Work
+
+-   Revollo-Fernández et al. (2024) estimated economic and marginal product value to establish a direct relationship between subsidies and extraction
+-   Sumaila et al. (2019) establishes the bulk of global subsidies to still be within the category of “capacity-enhancing” subsidies
+
+## Relevant Policy Reform
+
+![World Trade Organization Sustainable Development Goals](plots/sdg_txt.png)
+
+## Impromptu Mexican subsidy reform
+
+-   In 2020, Mexico eliminated fuel subsidies for the fishing sector
+-   The vessels referenced in this study recieved an average of \$40,000 USD in subsidies annually prior to reform
 
 ## Objectives
 
--   This project attempts to understand how Mexico’s subsidy reform might have caused a shift in effort, landings, or biomass.
--   We focus on the tuna longline fleet in the Gulf of Mexico, which is one of the largest fleets in Mexico and was heavily subsidized prior to 2020.
+-   Understanding how Mexico’s subsidy reform has caused a shift in effort, landings, or biomass
+-   Focus: tuna longline fleet in the Gulf of Mexico,  heavily subsidized prior to 2020
 
 # Data sources
 
-## Vessel status data
+## Subsidy data
 
--   The Mexican government maintains a vessel registry of all fishing vessels, including vessel characteristics, gear type, and home port.
+-   CausaNautra provides subsidy allocations by economic unit from 2011-2019
 
-## Vessel tracking data
+## Vessel Montioring System
 
--   Vessel-level fishing activity data from Mexico’s Sistema de Monitoreo Satelital de Embarcaciones Pesqueras (SISMEP) reports geographical location and time through satellite monitoring equipment. This data provides hourly location for around 2,500 vessels, from 2007 to present.
+-   VMS data from the National Commission of Aquaculture and Fisheries (CONAPESCA)
+-   provides vessel location and time
+-   \~ 2,500 vessels
+-   2007 - present
 
 ## Vessel-level landings
 
--   Mexico’s fisheries management agency provides landings data through CONAPESCA Avisos between 2000 and 2019, and CONAPESCA from 2018 to present. This data set provides year, vessel identification, target species, and weight of live catch
+-   National commission of fisheries and aquaculture
+-   target species and annual weight of live catch (kg)
+-   2000-present
+
+## Vessel status data
+
+-   Mexican vessel registry including vessel characteristics, gear type, and home port
 
 # Methods
 
+## Focus Area
+
+![Ramírez‑Mendoza et al.](plots/longline_sets.png)
+
 ## Data processing
 
--   Vessel monitoring system data was refined to vessels using longlining gear from 2016 to 2024. We calculated the total hours of fishing per vessel and year based on vessel speed and location of vessels that qualified for our area of interest.
-
--   We merged the fishing effort data with vessel registry to obtain vessel characteristics, and with landings data to obtain total annual landings per vessel. 
+-   VMS filtering
+    -   26 longline vessels (81.3% of total fleet)
+    -   2016-2024
+    -   Depth \> 50m, Distance from shore \> 500m
+-   Merged with subsidy and landings data
+-   Calculated annual effort (hours) and catch-per-unit-effort (kg/hr) by vessel
 
 ## Data analysis
 
--   We used a linear regression model to analyze the differences in effort, catch, and catch-per-unit-effort before and after subsidy reform.
+$$
+y_{it} = \beta S_{it} + \omega_i + \varepsilon_{it}
+$$
 
--   This allows for an undertanding of vessel-level differences in fishing behavior and productivity. 
+-   $y_{it}$: Outcome variable for vessel $i$ at year $t$
+-   $\beta$: Effect of subsidy reform on outcome variable
+-   $S_{it}$: Variable for subsidy status (0 = pre subsidy reform, 1 = post subsidy reform)
+-   $\omega_i$: Fixed effect for vessel identification $i$
+-   $\varepsilon_{it}$: Error term
 
-## Results
+## Data analysis
 
--   We found a significant decrease in fishing effort and catch after the subsidy reform, but no significant change in catch-per-unit-effort.
+-   We used a linear regression model to analyze the differences in effort, catch, and catch-per-unit-effort before and after subsidy reform
 
+-   This allows for an understanding of vessel-level differences in fishing behavior and productivity
+
+## Patterns- effort
+
+![](plots/effort_plot_clean.png){fig-align="center" width="359"}
+
+## Patterns- effort, catch, and catch-per-unit-effort
+
+![](plots/effort_bar_clean.png){width="359"} ![](plots/catch_bar_clean.png){width="314"} ![](plots/cpue_bar_clean.png){width="310" height="449"}
+
+## 
+
+| Dependent Variables: | effort (hours) | catch (kg)     | cpue (kg/hr) |
+|----------------------|----------------|----------------|--------------|
+| Subsidized period    | 5,079.47       | 52,678.63      | 10.35        |
+| No subsidy period    | -1,361.4\*\*\* | -8,540.4\*\*\* | 2.19\*\*\*   |
+| Standard Error       | (190.9)        | (2,285.2)      | (0.617)      |
+| Observations         | 187            | 187            | 187          |
+| R²                   | 0.31122        | 0.42218        | 0.34551      |
+
+: Impact of Subsidy Reform on effort, catch, and catch-per-unit-effort (cpue)
 
 ## Discussion
 
--   The results suggest that fuel-subsidy removal can substantially curb fishing effort with only marginal impacts on catch, pointing to a viable policy lever for rebuilding overexploited stocks.
+-   Fuel-subsidy removal can substantially curb fishing effort with marginal impacts on catch
 
--   This provides the first vessel-level estimates of the consequences of capacity-reducing reforms in the Gulf of Mexico tuna longline fishery, and may further inform implementation of WTO SDG 14.6.
+-   First vessel-level estimates of the consequences of capacity-reducing reforms in the Gulf of Mexico tuna longline fishery
 
--   However, the long-term ecological and economic impacts of such reforms require further investigation to ensure sustainable fisheries management.
+-   Long-term impacts of reforms require further investigation to ensure sustainable fisheries management
+
+## Next steps
+
+-   Compare patterns of behavior to an unsubsidized fleet as a control group
+
+## Thank you.
+
+## Bar charts, before outlier removal
+
+![](plots/effort_bar.png){width="315"} ![](plots/catch_bar.png){width="315"} ![](plots/cpue_bar.png){width="315"}
+
+## Scatter plots, after outlier removal
+
+![](plots/effort_plot_clean.png){width="322"} ![](plots/catch_plot_clean.png){width="322"} ![](plots/cpue_plot_clean.png){width="322"}
+
+## Scatter plots, before outlier removal
+
+![](plots/effort_plot.png){width="322"} ![](plots/catch_plot.png){width="322"} ![](plots/cpue_plot.png){width="322"}
+
+## Box Plots, after outlier removal
+
+![](plots/effort_box_clean.png){width="322"} ![](plots/catch_box_clean.png){width="322"} ![](plots/cpue_box_clean.png){width="322"}
+
+## Box plots, before outlier removal
+
+![](plots/effort_box.png){width="322"} ![](plots/catch_box.png){width="322"} ![](plots/cpue_box.png){width="322"}
+
+# Effort box plots
+
+Before and after subsidy removal
+
+![](plots/effort_box.png){width="400"} ![](plots/effort_box_clean.png){width="400"}
