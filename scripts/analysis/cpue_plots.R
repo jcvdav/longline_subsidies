@@ -274,13 +274,15 @@ ggsave("plots/cpue_plot.png")
 
 cpue_by_vessel |> 
   ggplot(aes(x = year, y = effort_hours, color = period)) +
-  geom_point() + 
+  geom_vline(xintercept = 2019.5, linetype = "dashed") +
   geom_smooth(method = "lm") + 
+  geom_point() + 
   labs(
     title = "Fishing effort of Mexican tuna longlining",
     x = "Year",
     y = "Effort (hours)"
-  )
+  ) +
+  theme_minimal(base_size = 14)
 ggsave("plots/effort_plot_clean.png")
 
 #scatterplot - effort original data

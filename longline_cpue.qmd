@@ -1,9 +1,17 @@
 ---
-title: "Impromptu fuel subsidy reform decreases effort by tuna longliners in the Gulf of Mexico"
-author: "Aubriana Rhodes"
+title: "*Impromptu* fuel subsidy reform decreases effort by tuna longliners in the Gulf of Mexico"
+subtitle: "GCFI - Name of session here"
+author: "**Aubriana Rhodes** & Juan Carlos Villaseñor-Derbez"
+date: "October 27, 2025"
 format: 
   revealjs:
+    slide-number: c/t 
     incremental: true
+    smaller: true
+  beamer:
+    aspectratio: 169
+    incremental: true
+    slide-level: 2
 ---
 
 ## Agenda
@@ -19,19 +27,24 @@ format:
 
 -   More than 35% of global fish stocks are being overfished
 -   Subsidies that encourage overfishing are a key driver of overcapacity in the fishing industry
--   Subsidization is economic inefficiency
+-   Subsidization is economicaly inefficient
 
 ## Goals
 
--   Understanding how behavior changes in response to policy
--   Providing a reference for actions that decrease fishing effort
+-   Understand how fishing behavior changes in response to policy
+-   Provide a reference for actions that decrease fishing effort
 
-## What are fuel subsidies?
+## Fuel subsidies
+
+**What are fuel subsidies?**
 
 -   Capacity-enhancing subsidies that directly incentivize increased effort
 -   Financial contributions awarded from the government on fuel that can partially determine profitability
 
-## Why should we care?
+
+. . .
+
+**Why should we care?**
 
 -   Subsidies increase fishing effort, leading to over 60% of Mexican fishery stocks being at unsustainable levels
 -   Many fisheries are not profitable without subsidies
@@ -43,35 +56,42 @@ format:
 
 ## Relevant Policy Reform
 
-![World Trade Organization Sustainable Development Goals](plots/sdg_txt.png)
+<!-- ![World Trade Organization Sustainable Development Goals](plots/sdg_txt.png) -->
 
-## Impromptu Mexican subsidy reform
+## *Impromptu* Mexican subsidy reform
 
--   In 2020, Mexico eliminated fuel subsidies for the fishing sector
--   The vessels referenced in this study recieved an average of \$40,000 USD in subsidies annually prior to reform
+-   Mexico provided fuel subsidies to its fisheries since 2006
+-   In 2020, it eliminated fuel subsidies for the fishing sector
+-   The vessels referenced in this study recieved an average of **\$40,000 USD** in subsidies annually prior to reform
 
-## Objectives
+. . .
 
--   Understanding how Mexico’s subsidy reform has caused a shift in effort, landings, or biomass
--   Focus: tuna longline fleet in the Gulf of Mexico,  heavily subsidized prior to 2020
+**Specific Objectives**
 
-# Data sources
+-   Understand how Mexico’s subsidy reform has caused a shift in effort, landings, and catch-per-unit-effort
+-   Focus: tuna longline fleet in the Gulf of Mexico, heavily subsidized prior to 2020
 
-## Subsidy data
+## Data sources
+
+**Subsidy data**
 
 -   CausaNautra provides subsidy allocations by economic unit from 2011-2019
+-   Allows us to identify who received a subsidy before the reform
 
-## Vessel Montioring System
+. . .
 
--   VMS data from the National Commission of Aquaculture and Fisheries (CONAPESCA)
--   provides vessel location and time
--   \~ 2,500 vessels
+**Vessel Montioring System**
+
+-   From Mexico's Satelite Monitoring of Fishing Vessels System
+-   provides vessel location, identity, and time
 -   2007 - present
 
-## Vessel-level landings
+. . .
 
--   National commission of fisheries and aquaculture
--   target species and annual weight of live catch (kg)
+**Vessel-level landings**
+
+-   From National Commission of Aquaculture and Fisheries (CONAPESCA)
+-   Target species and annual weight of live catch (kg)
 -   2000-present
 
 ## Vessel status data
@@ -91,7 +111,7 @@ format:
     -   2016-2024
     -   Depth \> 50m, Distance from shore \> 500m
 -   Merged with subsidy and landings data
--   Calculated annual effort (hours) and catch-per-unit-effort (kg/hr) by vessel
+-   Calculated annual effort (hours), total catch (kg) and catch-per-unit-effort (kg/hr) by vessel
 
 ## Data analysis
 
@@ -100,12 +120,14 @@ y_{it} = \beta S_{it} + \omega_i + \varepsilon_{it}
 $$
 
 -   $y_{it}$: Outcome variable for vessel $i$ at year $t$
--   $\beta$: Effect of subsidy reform on outcome variable
--   $S_{it}$: Variable for subsidy status (0 = pre subsidy reform, 1 = post subsidy reform)
--   $\omega_i$: Fixed effect for vessel identification $i$
+-   $S_{it}$: Variable for subsidy period (0 = pre reform, 1 = post reform)
+-   $\omega_i$: Fixed effect for vessel $i$
 -   $\varepsilon_{it}$: Error term
+-   $\beta$: Effect of subsidy reform on outcome variable
 
 ## Data analysis
+
+<!-- I suggest you remove this slide alltogether to save some time-->
 
 -   We used a linear regression model to analyze the differences in effort, catch, and catch-per-unit-effort before and after subsidy reform
 
@@ -113,13 +135,13 @@ $$
 
 ## Patterns- effort
 
-![](plots/effort_plot_clean.png){fig-align="center" width="359"}
+![](plots/effort_plot_clean.png){fig-align="center" width="600"}
 
 ## Patterns- effort, catch, and catch-per-unit-effort
 
 ![](plots/effort_bar_clean.png){width="359"} ![](plots/catch_bar_clean.png){width="314"} ![](plots/cpue_bar_clean.png){width="310" height="449"}
 
-## 
+## Results
 
 | Dependent Variables: | effort (hours) | catch (kg)     | cpue (kg/hr) |
 |----------------------|----------------|----------------|--------------|
@@ -127,46 +149,61 @@ $$
 | No subsidy period    | -1,361.4\*\*\* | -8,540.4\*\*\* | 2.19\*\*\*   |
 | Standard Error       | (190.9)        | (2,285.2)      | (0.617)      |
 | Observations         | 187            | 187            | 187          |
-| R²                   | 0.31122        | 0.42218        | 0.34551      |
+| R²                   | 0.311          | 0.422          | 0.345        |
+|\*\*\* p<0.01|
 
 : Impact of Subsidy Reform on effort, catch, and catch-per-unit-effort (cpue)
 
+<!-- 1361 / 5079 = 0.26 -->
+
+- 26% decrease in effort
+- 16% decrease in catch
+- 20% **increase** in catch-per-unit-effort
+
+
 ## Discussion
 
--   Fuel-subsidy removal can substantially curb fishing effort with marginal impacts on catch
+-   Fuel-subsidy removal can substantially curb fishing effort and reduce total catch
+
+-   Efficiency of the fishery increases when marginal vessels are no longer subsidized
 
 -   First vessel-level estimates of the consequences of capacity-reducing reforms in the Gulf of Mexico tuna longline fishery
 
 -   Long-term impacts of reforms require further investigation to ensure sustainable fisheries management
 
-## Next steps
+. . .
+
+**Next steps**
 
 -   Compare patterns of behavior to an unsubsidized fleet as a control group
 
-## Thank you.
+# Thank you
 
-## Bar charts, before outlier removal
+Aubriana Rhodes | abl141@miami.edu
 
-![](plots/effort_bar.png){width="315"} ![](plots/catch_bar.png){width="315"} ![](plots/cpue_bar.png){width="315"}
+<!-- ## Bar charts, before outlier removal -->
 
-## Scatter plots, after outlier removal
+<!-- ![](plots/effort_bar.png){width="315"} ![](plots/catch_bar.png){width="315"} ![](plots/cpue_bar.png){width="315"} -->
 
-![](plots/effort_plot_clean.png){width="322"} ![](plots/catch_plot_clean.png){width="322"} ![](plots/cpue_plot_clean.png){width="322"}
+## Scatter plots
 
-## Scatter plots, before outlier removal
+![](plots/effort_plot_clean.png){width="400"}![](plots/catch_plot_clean.png){width="400"} 
+![](plots/cpue_plot_clean.png){width="400"}
 
-![](plots/effort_plot.png){width="322"} ![](plots/catch_plot.png){width="322"} ![](plots/cpue_plot.png){width="322"}
+<!-- ## Scatter plots, before outlier removal -->
 
-## Box Plots, after outlier removal
+<!-- ![](plots/effort_plot.png){width="322"} ![](plots/catch_plot.png){width="322"} ![](plots/cpue_plot.png){width="322"} -->
+
+## Box Plots
 
 ![](plots/effort_box_clean.png){width="322"} ![](plots/catch_box_clean.png){width="322"} ![](plots/cpue_box_clean.png){width="322"}
 
-## Box plots, before outlier removal
+<!-- ## Box plots, before outlier removal -->
 
-![](plots/effort_box.png){width="322"} ![](plots/catch_box.png){width="322"} ![](plots/cpue_box.png){width="322"}
+<!-- ![](plots/effort_box.png){width="322"} ![](plots/catch_box.png){width="322"} ![](plots/cpue_box.png){width="322"} -->
 
-# Effort box plots
+## Effort box plots
 
 Before and after subsidy removal
 
-![](plots/effort_box.png){width="400"} ![](plots/effort_box_clean.png){width="400"}
+![](plots/effort_box_clean.png)
