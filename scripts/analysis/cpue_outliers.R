@@ -38,7 +38,7 @@ get_vms_data <- function(rnpa, year) {
     collect()
 }
 
-#Vessel 0034389, year 2018 ------------------------------------------------------
+#Vessel 0034389, year 2018 DEF REMOVE ------------------------------------------------------
 #filter ------------------------------------------------------
 vessel_rnpa <- "00034389"
 year <- 2018
@@ -74,7 +74,7 @@ leaflet() %>%
     weight = 2,
     opacity = 0.8
   )
-#Vessel 00034389, year 2016 ------------------------------------------------------
+#Vessel 00034389, year 2016 ANALYZE RAW LANDINGS DATA ------------------------------------------------------
 #filter ------------------------------------------------------
 vessel_rnpa <- "00034389"
 year <- 2016
@@ -88,6 +88,8 @@ write.csv(spatial_df, "data/estimation/vms_00034389_2016.csv", row.names = FALSE
 
 spatial_sf <- st_as_sf(spatial_df, coords = c("lon", "lat"), crs = 4326)
 st_write(spatial_sf, "data/estimation/vms_00034389_2016.gpkg", driver = "GPKG", delete_dsn = TRUE)
+
+
 
 #create a leaflet map------------------------------------------------------
 
@@ -110,7 +112,7 @@ leaflet() %>%
     weight = 2,
     opacity = 0.8
   )
-#Vessel 00074500, year 2018 ------------------------------------------------------
+#Vessel 00074500, year 2018 DEF REMOVE ------------------------------------------------------
 #filter ------------------------------------------------------
 vessel_rnpa <- "00074500"
 year <- 2018

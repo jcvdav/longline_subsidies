@@ -1,6 +1,6 @@
 ---
 title: "*Impromptu* fuel subsidy reform decreases effort by tuna longliners in the Gulf of Mexico"
-subtitle: "GCFI - Name of session here"
+subtitle: "GCFI - Gear Technology"
 author: "**Aubriana Rhodes** & Juan Carlos Villaseñor-Derbez"
 date: "October 27, 2025"
 format: 
@@ -56,7 +56,7 @@ format:
 
 ## Relevant Policy Reform
 
-<!-- ![World Trade Organization Sustainable Development Goals](plots/sdg_txt.png) -->
+![World Trade Organization Sustainable Development Goals](plots/sdg_txt.png)
 
 ## *Impromptu* Mexican subsidy reform
 
@@ -96,13 +96,13 @@ format:
 
 ## Vessel status data
 
--   Mexican vessel registry including vessel characteristics, gear type, and home port
+-   Mexican vessel registry including vessel characteristics, specifically gear type
 
 # Methods
 
 ## Focus Area
 
-![Ramírez‑Mendoza et al.](plots/longline_sets.png)
+![Ramírez‑Mendoza et al. (2024)](plots/longline_sets.png)
 
 ## Data processing
 
@@ -124,14 +124,6 @@ $$
 -   $\omega_i$: Fixed effect for vessel $i$
 -   $\varepsilon_{it}$: Error term
 -   $\beta$: Effect of subsidy reform on outcome variable
-
-## Data analysis
-
-<!-- I suggest you remove this slide alltogether to save some time-->
-
--   We used a linear regression model to analyze the differences in effort, catch, and catch-per-unit-effort before and after subsidy reform
-
--   This allows for an understanding of vessel-level differences in fishing behavior and productivity
 
 ## Patterns- effort
 
