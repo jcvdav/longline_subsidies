@@ -67,23 +67,19 @@ t.test(catch_kg ~ period, data = cpue_by_vessel)
 cpue_by_vessel$period <- factor(cpue_by_vessel$period, levels = c("subsidies", "no subsidies"))
 
 #CPUE
-model_cpue <- feols(cpue ~ period | vessel_id, data = cpue_by_vessel) 
-summary(model_cpue)
-
-#Effort 
-model_effort <- feols(effort_hours ~ period | vessel_id, data = cpue_by_vessel)
-summary(model_effort)
-
-#Catch
-model_catch <- feols(catch_kg ~ period | vessel_id, data = cpue_by_vessel)
-summary(model_catch)
+models <- feols(c(effort_hours, catch_kg, cpue) ~ period | vessel_id, data = cpue_by_vessel) 
 
 #Summary table
-etable(model_effort, model_catch, model_cpue,
-       dict = c("periodsubsidies" = "Subsidies"),
+etable(models,
+       dict = c("periodnosubsidies" = "Reform"),
        tex = TRUE,
        file = "data/processed/cpue_regression.tex",
        title = "Impact of Subsidy Reform on Catch Efficiency, Effort, and Catch",
        label = "tab:cpue_regression",
        fitstat = c("n", "r2"),
        digits = 3)
+
+cpue_by_vessel |> 
+  filter(period == "subsidies") |> 
+  select(effort_hours:cpue) |> 
+  summarize_all(mean)

@@ -28,7 +28,7 @@ subsidy_roster <- readRDS(file = here("../mexican_subsidies/data/processed/econo
 rnpa <- unique(effort$eu_rnpa)
 
 ll_subsidies <- filter(subsidy_roster,
-                       year >= 2016,
+                       year >= 2011,
                        eu_rnpa %in% rnpa) |> 
   select(year, eu_rnpa, subsidy_pesos, treated)
 

@@ -42,7 +42,7 @@ ll <- vi |>
 
 effort <- vms |> 
   inner_join(ll, by = join_by(vessel_rnpa)) |> 
-  filter(between(year, 2016, 2024),
+  filter(between(year, 2011, 2024),
          fishing_region %in% c(5, 6),
          depth_m < -50,
          hours < 1.5,

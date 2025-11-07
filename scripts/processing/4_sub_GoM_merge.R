@@ -35,7 +35,7 @@ data <- inner_join(effort, landings, by = join_by(year, vessel_rnpa)) |>
   ungroup() |>
   select(period, year, eu_id = eu_rnpa, vessel_id = vessel_rnpa, n_times_subsidized, effort_hours = h, catch_kg = live_weight) |> # Select the appropriate columns here
   mutate(cpue = catch_kg / effort_hours) |> 
-  filter(period == "no subsidies" | n_times_subsidized == 4 & period == "subsidies") |>
+  filter(period == "no subsidies" | n_times_subsidized == 9 & period == "subsidies") |>
   filter(!(year == 2018 & vessel_id %in% c("00074500", "00034389")), !(year == 2016 & vessel_id == "00034389"))
 
   

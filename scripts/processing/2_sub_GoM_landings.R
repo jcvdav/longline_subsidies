@@ -26,7 +26,7 @@ landings <-  readRDS(file = url("https://github.com/jcvdav/mex_fisheries/raw/ref
 # X ----------------------------------------------------------------------------
 rnpa <- unique(effort$vessel_rnpa)
 ll_landings <- filter(landings,
-                      between(year, 2016, 2024),
+                      between(year, 2011, 2024),
                       vessel_rnpa %in% rnpa,
                       main_species_group %in% c("ATUN")) |> 
   select(year, vessel_rnpa, live_weight) |> 
