@@ -21,7 +21,7 @@ pacman::p_load(
 # Load data --------------------------------------------------------------------
 effort <- readRDS("data/processed/annual_effort_by_vessel.rds")
 landings <- readRDS("data/processed/annual_landings_by_vessel.rds")
-subsidies <- readRDS("data/processed/annual_subsidies_by_economic_unit.rds") # I added this on July 15, 2025
+subsidies <- readRDS("data/processed/annual_subsidies_by_economic_unit.rds")
 
 ## PROCESSING ##################################################################
 
@@ -38,20 +38,6 @@ data <- inner_join(effort, landings, by = join_by(year, vessel_rnpa)) |>
   filter(period == "no subsidies" | n_times_subsidized == 9 & period == "subsidies") |>
   filter(!(year == 2018 & vessel_id %in% c("00074500", "00034389")), !(year == 2016 & vessel_id == "00034389"))
 
-  
-  
-
-## VISUALIZE ###################################################################
-
-# X ----------------------------------------------------------------------------
-ggplot(data, aes(x = period, y = effort_hours)) +
-  stat_summary(geom = "col", fun = "mean")
-
-ggplot(data, aes(x = period, y = catch_kg)) +
-  stat_summary(geom = "col", fun = "mean")
-
-ggplot(data, aes(x = period, y = cpue)) +
-  stat_summary(geom = "col", fun = "mean")
 
 ## EXPORT ######################################################################
 # X ----------------------------------------------------------------------------
