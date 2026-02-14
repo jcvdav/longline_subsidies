@@ -1,9 +1,10 @@
 #load packages
 library(dplyr)
 library(fixest)
+library(modelsummary)
 
 #load original data
-cpue_by_vessel <- readRDS("data/estimation/annual_effort_and_catch_by_vessel.rds")
+cpue <- readRDS("data/estimation/annual_effort_and_catch_by_vessel.rds")
 
 #subsidy counts-----------------------------------------------------
 subsidy_counts <- cpue_by_vessel |> 
@@ -18,68 +19,85 @@ count(subsidy_counts, years_subsidized)
 eu_counts <- count(cpue_by_vessel, eu_id)
 
 
-#removing outliers----------------------------------------------------
-#two outliers already removed in 4_sub_GoM_merge.R, year 2018, vessel id 00074500, 00034389
-Q1 <- quantile(cpue_by_vessel$cpue, 0.25)
-Q3 <- quantile(cpue_by_vessel$cpue, 0.75)
-IQR = Q3 - Q1
-
-lower_bound <- Q1 - 1.5 * IQR
-upper_bound <- Q3 + 1.5 * IQR
-
-cpue_clean <- cpue_by_vessel[cpue_by_vessel$cpue >= lower_bound & cpue_by_vessel$cpue <= upper_bound,  ]
-
-
-#identifying outliers
-cpue_outliers <- cpue_by_vessel[cpue_by_vessel$cpue <= lower_bound | cpue_by_vessel$cpue >= upper_bound, ]
-
-
-
-#significance tests-------------------------------------------------
-
-# t tests cpue before and after subsidies
-
-t.test(cpue ~ period, data = cpue_by_vessel)
-#50.6% decrease in cpue, p = 0.2877
-
-#t.test(cpue ~ period, data = cpue_clean)
-#12.3% increase in cpue, p = 0.03804
-
-#effort before and after subsidies
-
-t.test(effort_hours ~ period, data = cpue_by_vessel)
-#16.5% decrease in effort, p = 0.000252
-
-#t.test(effort_hours ~ period, data = cpue_clean)
-#23.7% decrease in effort, p = 0.00000026
-
-#catch before and after subsidies
-
-t.test(catch_kg ~ period, data = cpue_by_vessel)
-#10.1% decrease in catch, p = 0.1314
-
-#t.test(catch_kg ~ period, data = cpue_clean)
-#13.6% decrease in catch, p = 0.03917 NO SIGNIFICANCE
-
 #Linear regressions------------------------------------------------- 
 
 #Adjusting reference level
-cpue_by_vessel$period <- factor(cpue_by_vessel$period, levels = c("subsidies", "no subsidies"))
+cpue$period <- factor(cpue$period, levels = c("subsidies", "no subsidies"))
 
-#CPUE
-models <- feols(c(effort_hours, catch_kg, cpue) ~ period | vessel_id, data = cpue_by_vessel) 
+#Models in levels
+m_effort  <- feols(effort_hours ~ period | vessel_id,
+                   data = cpue,
+                   vcov = "NW",
+                   panel.id = ~ vessel_id + year)
+
+m_catch   <- feols(catch_kg ~ period | vessel_id,
+                   data = cpue,
+                   vcov = "NW",
+                   panel.id = ~ vessel_id + year)
+
+m_cpue    <- feols(cpue ~ period | vessel_id,
+                   data = cpue,
+                   vcov = "NW",
+                   panel.id = ~ vessel_id + year)
+
+#Log transformed models 
+cpue <- cpue |> 
+  mutate(
+    log_effort = log(effort_hours + 1),
+    log_catch  = log(catch_kg + 1),
+    log_cpue   = log(cpue + 1)
+  )
+
+m_log_effort <- feols(log_effort ~ period | vessel_id,
+                      data = cpue,
+                      vcov = "NW",
+                      panel.id = ~ vessel_id + year)
+
+m_log_catch  <- feols(log_catch ~ period | vessel_id,
+                      data = cpue,
+                      vcov = "NW",
+                      panel.id = ~ vessel_id + year)
+
+m_log_cpue   <- feols(log_cpue ~ period | vessel_id,
+                      data = cpue,
+                      vcov = "NW",
+                      panel.id = ~ vessel_id + year)
+#Pre-subsidy means 
+pre_means <- cpue |> 
+  filter(period == "subsidies") |> 
+  summarize(
+    effort_hours = mean(effort_hours, na.rm = TRUE),
+    catch_kg     = mean(catch_kg, na.rm = TRUE),
+    cpue         = mean(cpue, na.rm = TRUE)
+  )
+
 
 #Summary table
-etable(models,
-       dict = c("periodnosubsidies" = "Reform"),
-       tex = TRUE,
-       file = "data/processed/cpue_regression.tex",
-       title = "Impact of Subsidy Reform on Catch Efficiency, Effort, and Catch",
-       label = "tab:cpue_regression",
-       fitstat = c("n", "r2"),
-       digits = 3)
+models <- list(
+  "Effort (levels)" = m_effort,
+  "Catch (levels)"  = m_catch,
+  "CPUE (levels)"   = m_cpue,
+  "Effort (log)"    = m_log_effort,
+  "Catch (log)"     = m_log_catch,
+  "CPUE (log)"      = m_log_cpue
+)
 
-cpue_by_vessel |> 
-  filter(period == "subsidies") |> 
-  select(effort_hours:cpue) |> 
-  summarize_all(mean)
+modelsummary(
+  models,
+  coef_map = c("periodno subsidies" = "Reform"),
+  add_rows = data.frame(
+    term = "Pre‑subsidy mean",
+    `Effort (levels)` = pre_means$effort_hours,
+    `Catch (levels)`  = pre_means$catch_kg,
+    `CPUE (levels)`   = pre_means$cpue,
+    `Effort (log)`    = "",
+    `Catch (log)`     = "",
+    `CPUE (log)`      = ""
+  ),
+  output = "data/processed/cpue_regression.tex",
+  stars = TRUE,
+  gof_omit = "IC|Log|Adj"
+)
+
+
+

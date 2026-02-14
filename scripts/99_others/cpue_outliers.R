@@ -9,6 +9,38 @@ library(lubridate)
 #authenticate with Google Cloud ------------------------------------
 bq_auth("laubri42@gmail.com")
 
+# Load merged data ----------------------------------------------------
+
+cpue <- readRDS("data/estimation/annual_effort_and_catch_by_vessel.rds")
+
+# Identify outliers ------------------------------------------------------
+# subsidies period--- 1 outlier in 2011 to look at 
+cpue_sub <- cpue %>%  filter(period == "subsidies")
+
+Q1_sub <- quantile(cpue_sub$cpue, 0.25)
+Q3_sub <- quantile(cpue_sub$cpue, 0.75)
+IQR_sub <- Q3_sub - Q1_sub
+
+lower_sub <- Q1_sub - 1.5 * IQR_sub
+upper_sub <- Q3_sub + 1.5 * IQR_sub
+
+outliers_sub <- cpue_sub %>%  
+  filter(cpue <= lower_sub | cpue >= upper_sub)
+
+# no subisidies period--- 4 outliers in 2023 to look at 
+cpue_no_sub <- cpue %>%  filter(period == "no subsidies")
+
+Q1_no_sub <- quantile(cpue_no_sub$cpue, 0.25)
+Q3_no_sub <- quantile(cpue_no_sub$cpue, 0.75)
+IQR_no_sub <- Q3_no_sub - Q1_no_sub
+
+lower_no_sub <- Q1_no_sub - 1.5 * IQR_no_sub
+upper_no_sub <- Q3_no_sub + 1.5 * IQR_no_sub
+
+outliers_no_sub <- cpue_no_sub %>% 
+  filter(cpue <= lower_no_sub | cpue >= upper_no_sub)
+
+
 #outlier 1- vessel RNPA 00034389, year 2018------------------------------------------------------
 #load data------------------------------------------------------
 project_id <- "mex-fisheries"
@@ -74,7 +106,7 @@ leaflet() %>%
     weight = 2,
     opacity = 0.8
   )
-#Vessel 00034389, year 2016 ANALYZE RAW LANDINGS DATA ------------------------------------------------------
+#Vessel 00034389, year 2016 ANALYZE RAW LANDINGS DATA------------------------------------------------------
 #filter ------------------------------------------------------
 vessel_rnpa <- "00034389"
 year <- 2016
