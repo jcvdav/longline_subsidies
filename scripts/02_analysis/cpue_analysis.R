@@ -74,25 +74,23 @@ pre_means <- cpue |>
 
 #Summary table
 models <- list(
-  "Effort (levels)" = m_effort,
-  "Catch (levels)"  = m_catch,
-  "CPUE (levels)"   = m_cpue,
-  "Effort (log)"    = m_log_effort,
-  "Catch (log)"     = m_log_catch,
-  "CPUE (log)"      = m_log_cpue
+  list("Effort (levels)" = m_effort,
+       "Catch (levels)"  = m_catch,
+       "CPUE (levels)"   = m_cpue),
+  list("Effort (log)"    = m_log_effort,
+       "Catch (log)"     = m_log_catch,
+       "CPUE (log)"      = m_log_cpue)
 )
 
 modelsummary(
   models,
+  shape = "rbind",
   coef_map = c("periodno subsidies" = "Reform"),
   add_rows = data.frame(
     term = "Pre‑subsidy mean",
     `Effort (levels)` = pre_means$effort_hours,
     `Catch (levels)`  = pre_means$catch_kg,
-    `CPUE (levels)`   = pre_means$cpue,
-    `Effort (log)`    = "",
-    `Catch (log)`     = "",
-    `CPUE (log)`      = ""
+    `CPUE (levels)`   = pre_means$cpue
   ),
   output = "data/processed/cpue_regression.tex",
   stars = TRUE,

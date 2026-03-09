@@ -1,56 +1,29 @@
-<<<<<<< HEAD
 \begin{table}
 \centering
-\begin{talltblr}[         %% tabularray outer open
-entry=none,label=none,
-note{}={+ p \num{< 0.1}, * p \num{< 0.05}, ** p \num{< 0.01}, *** p \num{< 0.001}},
-]                     %% tabularray outer close
-{                     %% tabularray inner open
-colspec={Q[]Q[]Q[]Q[]Q[]Q[]Q[]},
-hline{2}={1-7}{solid, black, 0.05em},
-hline{4}={1-7}{solid, black, 0.05em},
-hline{1}={1-7}{solid, black, 0.1em},
-hline{11}={1-7}{solid, black, 0.1em},
-column{2-7}={}{halign=c},
-column{1}={}{halign=l},
-}                     %% tabularray inner close
-& Effort (levels) & Catch (levels) & CPUE (levels) & Effort (log) & Catch (log) & CPUE (log) \\
-Reform & \num{-1241.864}*** & \num{-11003.952}** & \num{1.222} & \num{-0.357}** & \num{-0.304}* & \num{0.053} \\
-& (\num{249.668}) & (\num{3298.126}) & (\num{0.780}) & (\num{0.092}) & (\num{0.109}) & (\num{0.056}) \\
-Num.Obs. & \num{213} & \num{213} & \num{213} & \num{213} & \num{213} & \num{213} \\
-R2 & \num{0.230} & \num{0.310} & \num{0.294} & \num{0.175} & \num{0.218} & \num{0.335} \\
-R2 Within & \num{0.145} & \num{0.069} & \num{0.015} & \num{0.113} & \num{0.058} & \num{0.005} \\
-RMSE & \num{1181.51} & \num{15825.17} & \num{3.87} & \num{0.39} & \num{0.48} & \num{0.29} \\
-Std.Errors & Newey-West (L=1) & Newey-West (L=1) & Newey-West (L=1) & Newey-West (L=1) & Newey-West (L=1) & Newey-West (L=1) \\
-FE: vessel\_id & X & X & X & X & X & X \\
-Pre‑subsidy mean & \num{4986.436} & \num{53101.769} & \num{10.669} &  &  &  \\
-\end{talltblr}
+\begin{tabular}[t]{lccc}
+\toprule
+  & (1) & (2) & (3)\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{4}{l}{\textit{Panel A}}\\
+\midrule \hspace{1em}Reform & -1241.864*** & -11003.952** & 1.222\\
+\hspace{1em} & (249.668) & (3298.126) & (0.780)\\
+\hspace{1em}R2 & 0.230 & 0.310 & 0.294\\
+\hspace{1em}R2 Within & 0.145 & 0.069 & 0.015\\
+\hspace{1em}RMSE & 1181.51 & 15825.17 & 3.87\\
+\addlinespace[0.5em]
+\multicolumn{4}{l}{\textit{Panel B}}\\
+\midrule \hspace{1em}Reform & -0.357** & -0.304* & 0.053\\
+\hspace{1em} & (0.092) & (0.109) & (0.056)\\
+\hspace{1em}R2 & 0.175 & 0.218 & 0.335\\
+\hspace{1em}R2 Within & 0.113 & 0.058 & 0.005\\
+\hspace{1em}RMSE & 0.39 & 0.48 & 0.29\\
+\midrule\\
+\hspace{1em}Num.Obs. & 213 & 213 & 213\\
+\hspace{1em}Std.Errors & Newey-West (L=1) & Newey-West (L=1) & Newey-West (L=1)\\
+\hspace{1em}FE: vessel_id & X & X & X\\
+Pre‑subsidy mean & 4986.436 & 53101.769 & 10.669\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\end{tabular}
 \end{table}
-=======
-
-\begin{table}[htbp]
-   \caption{\label{tab:cpue_regression} Impact of Subsidy Reform on Catch Efficiency, Effort, and Catch}
-   \centering
-   \begin{tabular}{lccc}
-      \tabularnewline \midrule \midrule
-      Dependent Variables: & effort\_hours    & catch\_kg         & cpue\\  
-      Model:               & (1)              & (2)               & (3)\\  
-      \midrule
-      \emph{Variables}\\
-      Reform               & -1,241.9$^{***}$ & -11,004.0$^{***}$ & 1.22$^{*}$\\   
-                           & (219.6)          & (2,941.5)         & (0.720)\\   
-      \midrule
-      \emph{Fixed-effects}\\
-      vessel\_id           & Yes              & Yes               & Yes\\  
-      \midrule
-      \emph{Fit statistics}\\
-      Observations         & 213              & 213               & 213\\  
-      R$^2$                & 0.23007          & 0.30990           & 0.29403\\  
-      \midrule \midrule
-      \multicolumn{4}{l}{\emph{IID standard-errors in parentheses}}\\
-      \multicolumn{4}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
-   \end{tabular}
-\end{table}
-
-
->>>>>>> f5f553898829f51a2217e1c430c0b540f55f3e60
