@@ -40,8 +40,6 @@ upper_no_sub <- Q3_no_sub + 1.5 * IQR_no_sub
 outliers_no_sub <- cpue_no_sub %>% 
   filter(cpue <= lower_no_sub | cpue >= upper_no_sub)
 
-
-#outlier 1- vessel RNPA 00034389, year 2018------------------------------------------------------
 #load data------------------------------------------------------
 project_id <- "mex-fisheries"
 dataset <- "mex_vms"
@@ -71,6 +69,7 @@ get_vms_data <- function(rnpa, year) {
 }
 
 #Vessel 0034389, year 2018 REMOVE ------------------------------------------------------
+#This outlier was removed as the VMS data shows extremely limited data points for location, likely an error causing the values to be inaccurate
 #filter ------------------------------------------------------
 vessel_rnpa <- "00034389"
 year <- 2018
@@ -106,7 +105,9 @@ leaflet() %>%
     weight = 2,
     opacity = 0.8
   )
+
 #Vessel 00034389, year 2016 ANALYZE RAW LANDINGS DATA------------------------------------------------------
+#This outlier was removed as the raw landings data for this vessel and year shows extremely limited catch, which is likely an error in the data. 
 #filter ------------------------------------------------------
 vessel_rnpa <- "00034389"
 year <- 2016
@@ -144,7 +145,8 @@ leaflet() %>%
     weight = 2,
     opacity = 0.8
   )
-#Vessel 00074500, year 2018 REMOVE ------------------------------------------------------
+#Vessel 00074500, year 2018  ------------------------------------------------------
+#This outlier was removed as it is likely an error in the data, as the VMS data shows extremely limited data points for location, which would make the values inaccurate.
 #filter ------------------------------------------------------
 vessel_rnpa <- "00074500"
 year <- 2018
@@ -158,6 +160,191 @@ write.csv(spatial_df, "data/estimation/vms_00074500_2018.csv", row.names = FALSE
 
 spatial_sf <- st_as_sf(spatial_df, coords = c("lon", "lat"), crs = 4326)
 st_write(spatial_sf, "data/estimation/vms_00074500_2018.gpkg", driver = "GPKG", delete_dsn = TRUE)
+
+#create a leaflet map------------------------------------------------------
+
+track_line <- spatial_sf %>%
+  summarise(do_union = FALSE) %>%
+  st_cast("LINESTRING")
+
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    data = spatial_sf,
+    radius = 3,
+    popup = ~paste("Time:", datetime),
+    color = "blue"
+  ) %>%
+  addPolylines(
+    data = track_line,
+    color = "red",
+    weight = 2,
+    opacity = 0.8
+  )
+
+#Vessel 00066001, year 2011
+#filter ------------------------------------------------------
+vessel_rnpa <- "00066001"
+year <- 2011
+
+spatial_df <- get_vms_data(vessel_rnpa, year)
+
+#export data------------------------------------------------------
+write.csv(spatial_df, "data/estimation/vms_00066001_2011.csv", row.names = FALSE)
+
+#convert to sf object------------------------------------------------------
+
+spatial_sf <- st_as_sf(spatial_df, coords = c("lon", "lat"), crs = 4326)
+st_write(spatial_sf, "data/estimation/vms_00066001_2011.gpkg", driver = "GPKG", delete_dsn = TRUE)
+
+#create a leaflet map------------------------------------------------------
+
+track_line <- spatial_sf %>%
+  summarise(do_union = FALSE) %>%
+  st_cast("LINESTRING")
+
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    data = spatial_sf,
+    radius = 3,
+    popup = ~paste("Time:", datetime),
+    color = "blue"
+  ) %>%
+  addPolylines(
+    data = track_line,
+    color = "red",
+    weight = 2,
+    opacity = 0.8
+  )
+
+#Vessel 00039180, year 2023
+#Filter ------------------------------------------------------
+vessel_rnpa <- "00039180"
+year <- 2023
+
+spatial_df <- get_vms_data(vessel_rnpa, year)
+
+#export data------------------------------------------------------
+write.csv(spatial_df, "data/estimation/vms_00039108_2023.csv", row.names = FALSE)
+
+#convert to sf object------------------------------------------------------
+
+spatial_sf <- st_as_sf(spatial_df, coords = c("lon", "lat"), crs = 4326)
+st_write(spatial_sf, "data/estimation/vms_00039108_2023.gpkg", driver = "GPKG", delete_dsn = TRUE)
+
+#create a leaflet map------------------------------------------------------
+
+track_line <- spatial_sf %>%
+  summarise(do_union = FALSE) %>%
+  st_cast("LINESTRING")
+
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    data = spatial_sf,
+    radius = 3,
+    popup = ~paste("Time:", datetime),
+    color = "blue"
+  ) %>%
+  addPolylines(
+    data = track_line,
+    color = "red",
+    weight = 2,
+    opacity = 0.8
+  )
+
+#Vessel 00008656, year 2023
+#Filter ------------------------------------------------------
+vessel_rnpa <- "00008656"
+year <- 2023
+
+spatial_df <- get_vms_data(vessel_rnpa, year)
+
+#export data------------------------------------------------------
+write.csv(spatial_df, "data/estimation/vms_00008656_2023.csv", row.names = FALSE)
+
+#convert to sf object------------------------------------------------------
+
+spatial_sf <- st_as_sf(spatial_df, coords = c("lon", "lat"), crs = 4326)
+st_write(spatial_sf, "data/estimation/vms_00008656_2023.gpkg", driver = "GPKG", delete_dsn = TRUE)
+
+#create a leaflet map------------------------------------------------------
+
+track_line <- spatial_sf %>%
+  summarise(do_union = FALSE) %>%
+  st_cast("LINESTRING")
+
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    data = spatial_sf,
+    radius = 3,
+    popup = ~paste("Time:", datetime),
+    color = "blue"
+  ) %>%
+  addPolylines(
+    data = track_line,
+    color = "red",
+    weight = 2,
+    opacity = 0.8
+  )
+
+#Vessel 00066035, year 2023
+#Filter ------------------------------------------------------
+vessel_rnpa <- "00066035"
+year <- 2023
+
+spatial_df <- get_vms_data(vessel_rnpa, year)
+
+#export data------------------------------------------------------
+write.csv(spatial_df, "data/estimation/vms_00066035_2023.csv", row.names = FALSE)
+
+#convert to sf object------------------------------------------------------
+
+spatial_sf <- st_as_sf(spatial_df, coords = c("lon", "lat"), crs = 4326)
+st_write(spatial_sf, "data/estimation/vms_00066035_2023.gpkg", driver = "GPKG", delete_dsn = TRUE)
+
+#create a leaflet map------------------------------------------------------
+
+track_line <- spatial_sf %>%
+  summarise(do_union = FALSE) %>%
+  st_cast("LINESTRING")
+
+
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(
+    data = spatial_sf,
+    radius = 3,
+    popup = ~paste("Time:", datetime),
+    color = "blue"
+  ) %>%
+  addPolylines(
+    data = track_line,
+    color = "red",
+    weight = 2,
+    opacity = 0.8
+  )
+
+#Vessel 00066217, year 2023
+#Filter ------------------------------------------------------
+vessel_rnpa <- "00066217"
+year <- 2023
+
+spatial_df <- get_vms_data(vessel_rnpa, year)
+
+#export data------------------------------------------------------
+write.csv(spatial_df, "data/estimation/vms_00066217_2023.csv", row.names = FALSE)
+
+#convert to sf object------------------------------------------------------
+
+spatial_sf <- st_as_sf(spatial_df, coords = c("lon", "lat"), crs = 4326)
+st_write(spatial_sf, "data/estimation/vms_00066217_2023.gpkg", driver = "GPKG", delete_dsn = TRUE)
 
 #create a leaflet map------------------------------------------------------
 
