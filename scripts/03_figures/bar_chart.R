@@ -4,7 +4,8 @@ pacman::p_load(
   here,
   tidyverse,
   ggplot2,
-  dplyr
+  dplyr,
+  cowplot
 )
 
 #load data _---------------------------------------------------------
@@ -12,7 +13,7 @@ cpue <-readRDS("data/estimation/annual_effort_and_catch_by_vessel.rds")
 
 #Effort -----------------------------------------------------------------------------
 
-cpue |> 
+effort_plot <- cpue |> 
   mutate(period = factor(period, levels = c("subsidies", "no subsidies"))) |> 
   group_by(period) |> 
   summarise(
@@ -34,11 +35,10 @@ cpue |>
   theme(legend.position = "none")
 
 
-ggsave("plots/effort_barchart.png")
 
 #Catch -----------------------------------------------------------------------------
 
-cpue |> 
+catch_plot <- cpue |> 
   mutate(period = factor(period, levels = c("subsidies", "no subsidies"))) |> 
   group_by(period) |> 
   summarise(
@@ -60,12 +60,10 @@ cpue |>
   theme(legend.position = "none")
 
 
-ggsave("plots/catch_barchart.png")
-
 
 #CPUE -----------------------------------------------------------------------------
 
-cpue |> 
+cpue_plot <- cpue |> 
   mutate(period = factor(period, levels = c("subsidies", "no subsidies"))) |> 
   group_by(period) |> 
   summarise(
@@ -86,6 +84,21 @@ cpue |>
   theme_linedraw() +
   theme(legend.position = "none")
 
+#Combine bar charts---------------------------------------------------
+combined_plot <- plot_grid(
+  effort_plot,
+  catch_plot,
+  cpue_plot,
+  ncol = 1,
+  labels = c("A", "B", "C"),
+  label_size = 14
+)
 
-ggsave("plots/cpue_barchart.png")
+#Save combined plot---------------------------------------------------
+ggsave("plots/combined_barchart.png",
+       combined_plot,
+       width = 6,
+       height = 12,
+       dpi = 300)
+
 
