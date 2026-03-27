@@ -35,11 +35,13 @@ data <- inner_join(effort, landings, by = join_by(year, vessel_rnpa)) |>
   ungroup() |>
   select(period, year, eu_id = eu_rnpa, vessel_id = vessel_rnpa, n_times_subsidized, effort_hours = h, catch_kg = live_weight) |> # Select the appropriate columns here
   mutate(cpue = catch_kg / effort_hours) |> 
-  filter(period == "no subsidies" | n_times_subsidized == 9 & period == "subsidies") |>
+  filter(period == "no subsidies" | n_times_subsidized == 9 & period == "subsidies") 
+
+data_clean <- data|>
   filter(!(year == 2018 & vessel_id %in% c("00074500", "00034389")), !(year == 2016 & vessel_id == "00034389"))
 
 
 ## EXPORT ######################################################################
 # X ----------------------------------------------------------------------------
-saveRDS(object = data,
+saveRDS(object = data_clean,
         file = here("data", "estimation", "annual_effort_and_catch_by_vessel.rds"))
