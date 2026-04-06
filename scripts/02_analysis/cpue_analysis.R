@@ -1,4 +1,14 @@
-#load packages
+################################################################################
+# Fixed-effects regressions for effort, catch, and CPUE
+################################################################################
+#
+# Tests for changes in fishing effort, catch, and catch-per-unit-effort before
+# and after Mexico's fuel subsidy reform using vessel fixed-effects models.
+# Outputs a LaTeX regression table for the manuscript.
+#
+################################################################################
+
+# Load packages ----------------------------------------------------------------
 library(dplyr)
 library(fixest)
 library(modelsummary)
@@ -7,7 +17,7 @@ library(modelsummary)
 cpue <- readRDS("data/estimation/annual_effort_and_catch_by_vessel.rds")
 
 #subsidy counts-----------------------------------------------------
-subsidy_counts <- cpue_by_vessel |> 
+subsidy_counts <- cpue |>
   filter(period == "subsidies") |> 
   group_by(vessel_id) |> 
   summarise(years_subsidized = n_distinct(year))
@@ -16,7 +26,7 @@ count(subsidy_counts, years_subsidized)
 
 #eu counts -----------------------------------------------------
 
-eu_counts <- count(cpue_by_vessel, eu_id)
+eu_counts <- count(cpue, eu_id)
 
 
 #Linear regressions------------------------------------------------- 

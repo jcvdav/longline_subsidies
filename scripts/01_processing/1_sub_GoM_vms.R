@@ -1,12 +1,13 @@
 ################################################################################
-# title
+# VMS effort processing for GoM longline vessels
 ################################################################################
 #
 # Juan Carlos Villaseñor-Derbez
 # jc_villasenor@miami.edu
-# date
 #
-# Description
+# Queries BigQuery for VMS data, filters to longline (PALANGRE) vessels in
+# fishing regions 5-6 (Gulf of Mexico), and calculates annual effort hours
+# by vessel. Applies spatial filters: depth > 50 m, distance from shore > 500 m.
 #
 ################################################################################
 
@@ -34,7 +35,7 @@ vi <- tbl(con, "vessel_info_v_20250815")
 
 ## PROCESSING ##################################################################
 
-# X ----------------------------------------------------------------------------
+# Filter to longline vessels ----------------------------------------------------
 ll <- vi |> 
   mutate(across(starts_with("gear_"), as.character)) |>
   filter(if_any(starts_with("gear_"), ~ str_detect(.x, "PALANGRE"))) |>
@@ -58,12 +59,12 @@ effort_local |>
 
 ## VISUALIZE ###################################################################
 
-# X ----------------------------------------------------------------------------
+# Quick visual check ------------------------------------------------------------
 ggplot(effort_local, aes(x = year, y = h)) +
   stat_summary(geom = "point", fun = "mean")
 
 ## EXPORT ######################################################################
 
-# X ----------------------------------------------------------------------------
+# Save processed effort data ----------------------------------------------------
 saveRDS(object = effort_local,
         file = here("data", "processed", "annual_effort_by_vessel.rds"))

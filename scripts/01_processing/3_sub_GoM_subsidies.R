@@ -1,12 +1,13 @@
 ################################################################################
-# title
+# Fuel subsidy data processing
 ################################################################################
 #
 # Juan Carlos Villaseñor-Derbez
 # jc_villasenor@miami.edu
-# date
 #
-# Description
+# Loads subsidy panel from the mexican_subsidies sibling repository and filters
+# to the economic units present in the study fleet.
+# Requires: ../mexican_subsidies/data/processed/economic_unit_subsidy_panel.rds
 #
 ################################################################################
 
@@ -24,7 +25,7 @@ subsidy_roster <- readRDS(file = here("../mexican_subsidies/data/processed/econo
 
 ## PROCESSING ##################################################################
 
-# X ----------------------------------------------------------------------------
+# Filter to study economic units ------------------------------------------------
 rnpa <- unique(effort$eu_rnpa)
 
 ll_subsidies <- filter(subsidy_roster,
@@ -35,7 +36,7 @@ ll_subsidies <- filter(subsidy_roster,
 
 ## VISUALIZE ###################################################################
 
-# X ----------------------------------------------------------------------------
+# Quick visual checks -----------------------------------------------------------
 ggplot(ll_subsidies,
        aes(x = year,
            y = subsidy_pesos)) +
@@ -49,6 +50,6 @@ ggplot(ll_subsidies,
 
 ## EXPORT ######################################################################
 
-# X ----------------------------------------------------------------------------
+# Save processed subsidies data -------------------------------------------------
 saveRDS(object = ll_subsidies,
         file = here("data", "processed", "annual_subsidies_by_economic_unit.rds"))

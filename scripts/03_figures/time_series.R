@@ -1,13 +1,25 @@
-# Load packages ----------------------------------------------------------------
+################################################################################
+# Time series of subsidies, effort, catch, and CPUE
+################################################################################
+#
+# Produces a 4-panel time series figure (A: subsidies, B: effort, C: catch,
+# D: CPUE) showing fleet-level annual totals/averages with a vertical reference
+# line at the 2020 subsidy reform.
+# Output: plots/time_series.png
+#
+################################################################################
 
+# Load packages ----------------------------------------------------------------
 library(tidyverse)
-library(dplyr)
 library(patchwork)
-library(ggplot2)
 
 
 # Load data --------------------------------------------------------------------
-# Same as merging code, keeping column for subsidy amount (pesos) from subsidies data
+effort    <- readRDS("data/processed/annual_effort_by_vessel.rds")
+landings  <- readRDS("data/processed/annual_landings_by_vessel.rds")
+subsidies <- readRDS("data/processed/annual_subsidies_by_economic_unit.rds")
+
+# Merge and filter (same as 4_sub_GoM_merge.R, retaining subsidy_pesos for Panel A)
 cpue_timeseries <- inner_join(effort, landings, by = join_by(year, vessel_rnpa)) |> 
   left_join(subsidies, by = join_by(year, eu_rnpa)) |> 
   mutate(period = ifelse(year <= 2019, "subsidies", "no subsidies")) |> 
@@ -40,8 +52,7 @@ panel_a <-
   geom_vline(xintercept = 2020, linetype = "dashed", color = "red", linewidth = 0.8) +
   geom_line(color = "steelblue", linewidth = 1) +
   labs(
-    title = "A. Total Subsidy Allocations",
-    y = "Subsidies (USD)",
+    y = "Subsidies (MXN)",
     x = "Year"
   ) +
   theme_linedraw()
@@ -52,7 +63,6 @@ panel_b <-
   geom_line(color = "steelblue", linewidth = 1) +
   geom_vline(xintercept = 2020, linetype = "dashed", color = "red", linewidth = 0.8) +
   labs(
-    title = "B. Total Fishing Effort",
     y = "Hours",
     x = "Year"
   ) +
@@ -64,8 +74,7 @@ panel_c <-
   geom_line(color = "steelblue", linewidth = 1) +
   geom_vline(xintercept = 2020, linetype = "dashed", color = "red", linewidth = 0.8) +
   labs(
-    title = "C. Total Live Catch",
-    y = "Kg",
+    y = "Catch (kg)",
     x = "Year"
   ) +
   theme_linedraw()
@@ -76,17 +85,14 @@ panel_d <-
   geom_line(color = "steelblue", linewidth = 1) +
   geom_vline(xintercept = 2020, linetype = "dashed", color = "red", linewidth = 0.8) +
   labs(
-    title = "D. Average Catch-per-unit-effort",
-    y = "Kg/hr",
+    y = "CPUE (kg/hr)",
     x = "Year"
   ) +
   theme_linedraw()
 
 # Combine into a 1-column figure
 combined <- panel_a / panel_b / panel_c / panel_d +
-  plot_annotation(title = "Figure 2: Time series of subsidies, effort, catch, and CPUE")
-
-combined
+  plot_annotation(tag_levels = "A")
 
 # Export figure ----------------------------------------------------------------
 ggsave("plots/time_series.png",

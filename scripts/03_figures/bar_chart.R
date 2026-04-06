@@ -1,4 +1,14 @@
-#load packages------------------------------------------------
+################################################################################
+# Bar charts of mean effort, catch, and CPUE by subsidy period
+################################################################################
+#
+# Produces a 3-panel combined bar chart (A: effort, B: catch, C: CPUE) showing
+# means with standard error bars for the subsidy vs no-subsidy periods.
+# Output: plots/combined_barchart.png
+#
+################################################################################
+
+# Load packages ----------------------------------------------------------------
 
 pacman::p_load(
   here,

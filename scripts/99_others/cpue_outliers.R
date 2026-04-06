@@ -1,3 +1,16 @@
+################################################################################
+# ARCHIVED: Outlier investigation for CPUE data
+################################################################################
+#
+# This script was used to identify and investigate CPUE outliers by downloading
+# VMS tracks from BigQuery and visualizing them on leaflet maps. The outlier
+# removal decisions made here are implemented in:
+#   scripts/01_processing/4_sub_GoM_merge.R (line 41)
+#
+# This script is not part of the analysis pipeline and is retained for reference.
+#
+################################################################################
+
 #load packages------------------------------------------------------
 library(bigrquery)
 library(DBI)
