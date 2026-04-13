@@ -30,7 +30,7 @@ con <- dbConnect(drv = bigquery(),
                  dataset = "mex_vms",
                  allowLargeResults = T)
 
-vms <- tbl(con, "mex_vms_processed_v_20250623")
+vms <- tbl(con, "mex_vms_processed_v_20260409")
 vi <- tbl(con, "vessel_info_v_20250815")
 
 ## PROCESSING ##################################################################

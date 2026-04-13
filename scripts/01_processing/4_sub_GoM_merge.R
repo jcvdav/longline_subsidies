@@ -39,7 +39,7 @@ data <- inner_join(effort, landings, by = join_by(year, vessel_rnpa)) |>
   filter(period == "no subsidies" | n_times_subsidized == 9 & period == "subsidies") 
 
 data_clean <- data|>
-  filter(!(year == 2018 & vessel_id %in% c("00074500", "00034389")), !(year == 2016 & vessel_id == "00034389"))
+  filter(!(year == 2018 & vessel_id == "00074500"))
 
 
 ## EXPORT ######################################################################
