@@ -1,29 +1,31 @@
 \begin{table}
 \centering
+\caption{\label{tab:table}Fixed-effects regression results for effort, catch, and CPUE before and after the 2020 fuel subsidy reform. Newey-West (L=1) standard errors in parentheses.}
+\centering
 \begin{tabular}[t]{lccc}
 \toprule
   & (1) & (2) & (3)\\
 \midrule
 \addlinespace[0.5em]
 \multicolumn{4}{l}{\textit{Panel A}}\\
-\midrule \hspace{1em}Reform & -958.622** & -11003.952** & -0.033\\
-\hspace{1em} & (238.513) & (3298.126) & (0.626)\\
-\hspace{1em}R2 & 0.176 & 0.310 & 0.307\\
-\hspace{1em}R2 Within & 0.095 & 0.069 & 0.000\\
-\hspace{1em}RMSE & 1156.35 & 15825.17 & 3.17\\
+\midrule \hspace{1em}Reform & -973.687*** & -7701.794** & -12.972\\
+\hspace{1em} & (196.865) & (2589.090) & (13.210)\\
+\hspace{1em}R2 & 0.279 & 0.432 & 0.108\\
+\hspace{1em}R2 Within & 0.137 & 0.064 & 0.007\\
+\hspace{1em}RMSE & 1177.63 & 14167.19 & 75.15\\
 \addlinespace[0.5em]
 \multicolumn{4}{l}{\textit{Panel B}}\\
-\midrule \hspace{1em}Reform & -0.276** & -0.304* & -0.023\\
-\hspace{1em} & (0.090) & (0.109) & (0.053)\\
-\hspace{1em}R2 & 0.131 & 0.218 & 0.321\\
-\hspace{1em}R2 Within & 0.075 & 0.058 & 0.001\\
-\hspace{1em}RMSE & 0.38 & 0.48 & 0.27\\
+\midrule \hspace{1em}Reform & -0.161 & -0.108 & 0.020\\
+\hspace{1em} & (0.102) & (0.119) & (0.081)\\
+\hspace{1em}R2 & 0.212 & 0.283 & 0.163\\
+\hspace{1em}R2 Within & 0.016 & 0.006 & 0.000\\
+\hspace{1em}RMSE & 0.60 & 0.67 & 0.45\\
 \midrule\\
-\hspace{1em}Num.Obs. & 213 & 213 & 213\\
+\hspace{1em}Num.Obs. & 185 & 185 & 185\\
 \hspace{1em}Std.Errors & Newey-West (L=1) & Newey-West (L=1) & Newey-West (L=1)\\
 \hspace{1em}FE: vessel_id & X & X & X\\
-Pre‑subsidy mean & 4986.428 & 53101.769 & 10.669\\
+Pre‑reform mean & 4971.416 & 51569.312 & 22.153\\
 \bottomrule
-\multicolumn{4}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{4}{l}{\rule{0pt}{1em}* p $<$ 0.1, ** p $<$ 0.05, *** p $<$ 0.01}\\
 \end{tabular}
 \end{table}
