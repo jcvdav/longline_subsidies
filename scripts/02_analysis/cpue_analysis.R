@@ -102,7 +102,7 @@ modelsummary(
     `Catch (levels)`  = pre_means$catch_kg,
     `CPUE (levels)`   = pre_means$cpue
   ),
-  output = "data/processed/cpue_regression.tex",
+  output = "tables/cpue_regression.tex",
   stars = TRUE,
   gof_omit = "IC|Log|Adj"
 )
@@ -177,7 +177,7 @@ modelsummary(
     `Catch (levels)`  = pre_means_no2020$catch_kg,
     `CPUE (levels)`   = pre_means_no2020$cpue
   ),
-  output = "data/processed/cpue_regression_no2020.tex",
+  output = "tables/cpue_regression_no2020.tex",
   stars = TRUE,
   gof_omit = "IC|Log|Adj"
 )
@@ -234,7 +234,7 @@ modelsummary(
     `Catch (levels)`  = pre_means$catch_kg,
     `CPUE (levels)`   = pre_means$cpue
   ),
-  output = "data/processed/cpue_regression_eucluster.tex",
+  output = "tables/cpue_regression_eucluster.tex",
   stars = TRUE,
   gof_omit = "IC|Log|Adj"
 )
