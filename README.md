@@ -14,12 +14,15 @@ longline_subsidies/
 │   └── processed/                           # Intermediate processed data (not raw)
 │       ├── annual_effort_by_vessel.rds
 │       ├── annual_landings_by_vessel.rds
-│       ├── annual_subsidies_by_economic_unit.rds
-│       └── cpue_regression.tex              # LaTeX regression table
-├── plots/                                   # Manuscript figures
+│       └── annual_subsidies_by_economic_unit.rds
+├── plots/                                   # Generated figures
 │   ├── combined_barchart.png
 │   ├── fishing_map.png
 │   └── time_series.png
+├── tables/                                  # Generated LaTeX regression tables
+│   ├── cpue_regression.tex
+│   ├── cpue_regression_no2020.tex
+│   └── cpue_regression_eucluster.tex
 ├── scripts/
 │   ├── 01_processing/                       # Data processing pipeline (run sequentially)
 │   │   ├── 1_sub_GoM_vms.R                 #   VMS effort from BigQuery
@@ -60,12 +63,12 @@ Our main audience is people interested fisheries sustainability and SDG 14. That
 
 ### 0. Global polish (do these as you go)
 
-- [ ] Replace placeholder captions ("Map of VMS fishing coordinates.", "Barchart with means before/after") with self-contained, stand-alone captions. A good fisheries-journal caption tells the reader what they are looking at, what the axes mean, and what the key takeaway is, without requiring them to read the main text.
-- [ ] Tighten the writing pass-by-pass. Use short, declarative sentences. The first sentence of every paragraph should be a topic sentence that could stand alone as a bullet point summary of the paragraph.
+- [ ] Replace placeholder figure captions ("Map of VMS fishing coordinates.", "Barchart with means before/after") with self-contained, stand-alone captions. A good caption tells the reader what they are looking at, what the axes mean, and what the key takeaway is, without requiring them to read the main text. I like to start with a title, followed by a description.
+- [ ] Tighten the writing we alreayd have. Use short, declarative sentences. The first sentence of every paragraph should be a topic sentence that could stand alone as a bullet point summary of the paragraph.
 
-### 1. Abstract (currently empty — write last)
+### 1. Abstract
 
-- [ ] Draft a ~200-word structured abstract after the rest of the paper is stable. Suggested flow, one sentence each: (1) why subsidy reform matters for SDG 14.6 and overfishing; (2) what Mexico did in 2020 and why it is a useful natural experiment setting; (3) what data we combined (VMS + CONAPESCA landings + CausaNatura subsidies, 23 vessels, 2016–2024); (4) what method we used (pre/post comparison at the vessel-level); (5) the three headline patterns (effort −20%, catch −15%, CPUE unchanged); (6) what this means for policy and what we can and cannot conclude from a descriptive design. You can largely reuse wha tyou had from GCFI.
+- [ ] Wait until the end to do this. But, eventually, draft a ~200-word structured abstract after the rest of the paper is stable. Suggested flow, one sentence each: (1) why subsidy reform matters for SDG 14.6 and overfishing; (2) what Mexico did in 2020 and why it is a useful natural experiment setting; (3) what data we combined (VMS + CONAPESCA landings + CausaNatura subsidies, 23 vessels, 2016–2024); (4) what method we used (pre/post comparison at the vessel-level); (5) the three headline patterns (effort −20%, catch −15%, CPUE unchanged); (6) what this means for policy and what we can and cannot conclude from a descriptive design. You can largely reuse wha tyou had from GCFI.
 
 ### 2. Introduction (expand from ~2 paragraphs to ~4–5)
 
