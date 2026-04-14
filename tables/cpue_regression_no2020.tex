@@ -4,27 +4,14 @@
 \centering
 \begin{tabular}[t]{lccc}
 \toprule
-  & (1) & (2) & (3)\\
+  & Effort (hr) & Catch (kg) & CPUE (kg/hr)\\
 \midrule
-\addlinespace[0.5em]
-\multicolumn{4}{l}{\textit{Panel A}}\\
-\midrule \hspace{1em}Reform & -1116.470*** & -8511.729** & -13.024\\
-\hspace{1em} & (220.913) & (2977.963) & (13.791)\\
-\hspace{1em}R2 & 0.304 & 0.422 & 0.120\\
-\hspace{1em}R2 Within & 0.164 & 0.073 & 0.006\\
-\hspace{1em}RMSE & 1206.09 & 14510.50 & 79.00\\
-\addlinespace[0.5em]
-\multicolumn{4}{l}{\textit{Panel B}}\\
-\midrule \hspace{1em}Reform & -0.211 & -0.138 & 0.038\\
-\hspace{1em} & (0.114) & (0.133) & (0.088)\\
-\hspace{1em}R2 & 0.225 & 0.284 & 0.145\\
-\hspace{1em}R2 Within & 0.025 & 0.009 & 0.001\\
-\hspace{1em}RMSE & 0.63 & 0.70 & 0.47\\
-\midrule\\
-\hspace{1em}Num.Obs. & 165 & 165 & 165\\
-\hspace{1em}Std.Errors & Newey-West (L=1) & Newey-West (L=1) & Newey-West (L=1)\\
-\hspace{1em}FE: vessel_id & X & X & X\\
-Pre‑reform mean & 4971.416 & 51569.312 & 22.153\\
+Post reform & \num{-1116.470}*** & \num{-8511.729}** & \num{-13.024}\\
+ & (\num{220.913}) & (\num{2977.963}) & (\num{13.791})\\
+\midrule
+Num.Obs. & \num{165} & \num{165} & \num{165}\\
+R2 Adj. & \num{0.190} & \num{0.328} & \num{-0.024}\\
+FE: vessel_id & X & X & X\\
 \bottomrule
 \multicolumn{4}{l}{\rule{0pt}{1em}* p $<$ 0.1, ** p $<$ 0.05, *** p $<$ 0.01}\\
 \end{tabular}
