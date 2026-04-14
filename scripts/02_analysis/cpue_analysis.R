@@ -22,27 +22,25 @@ add_label <- function(file, label) {
 }
 
 # Load data --------------------------------------------------------------------
-cpue <- readRDS("data/estimation/annual_effort_and_catch_by_vessel.rds")
-
-# Create post-reform indicator -------------------------------------------------
-cpue$post <- 1 * (cpue$period == "no subsidies")
+cpue <- readRDS("data/estimation/annual_effort_and_catch_by_vessel.rds") |> 
+  rename(vessel = vessel_id,
+         owner = eu_id) |> 
+  mutate(post = 1 * (period == "no subsidies"))
 
 # Subsidy counts ---------------------------------------------------------------
 subsidy_counts <- cpue |>
   filter(period == "subsidies") |>
-  group_by(vessel_id) |>
+  group_by(vessel) |>
   summarise(years_subsidized = n_distinct(year))
 
 count(subsidy_counts, years_subsidized)
 
 # EU counts --------------------------------------------------------------------
-eu_counts <- count(cpue, eu_id)
+eu_counts <- count(cpue, owner)
 
 # Dictionary for readable labels -----------------------------------------------
 setFixest_dict(c(
-  post = "Post reform",
-  vessel_id = "Vessel",
-  eu_id = "Economic unit"
+  post = "Post reform"
 ))
 
 gof_omit_regex <- "IC|Log|R2$|R2 W|RMSE|Std"
@@ -50,10 +48,10 @@ gof_omit_regex <- "IC|Log|R2$|R2 W|RMSE|Std"
 model_names <- c("Effort (hr)", "Catch (kg)", "CPUE (kg/hr)")
 
 # Main models ------------------------------------------------------------------
-m_main <- feols(c(effort_hours, catch_kg, cpue) ~ post | vessel_id,
+m_main <- feols(c(effort_hours, catch_kg, cpue) ~ post | vessel,
                 data = cpue, 
                 vcov = "NW",
-                panel.id = ~ vessel_id + year) |> 
+                panel.id = ~ vessel + year) |> 
   set_names(model_names)
 
 # Main regression table --------------------------------------------------------
@@ -68,11 +66,11 @@ modelsummary(
 add_label("tables/cpue_regression.tex", "tab:table")
 
 # Robustness: drop 2020 (COVID confound) --------------------------------------
-m_no2020 <- feols(c(effort_hours, catch_kg, cpue) ~ post | vessel_id,
+m_no2020 <- feols(c(effort_hours, catch_kg, cpue) ~ post | vessel,
                   data = cpue, 
                   subset = ~ year != 2020,
                   vcov = "NW", 
-                  panel.id = ~ vessel_id + year) |> 
+                  panel.id = ~ vessel + year) |> 
   set_names(model_names)
 
 modelsummary(
@@ -87,8 +85,8 @@ add_label("tables/cpue_regression_no2020.tex", "tab:no2020")
 
 # Robustness: SE clustered at the economic-unit level --------------------------
 modelsummary(
-  models_main,
-  vcov = ~ eu_id,
+  m_main,
+  vcov = ~ owner,
   coef_map = c("post" = "Post reform"),
   title = "Robustness: regression results with standard errors clustered at the economic-unit level.",
   output = "tables/cpue_regression_eucluster.tex",
